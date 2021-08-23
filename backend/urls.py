@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from luckerdogsFront import views
+from db_model import views
 
 router = routers.DefaultRouter()
-router.register(r'luckerdogsFront', views.luckerdogsView, 'luckerdogsFront')
+router.register(r'db_model', views.db_model_view, 'db_model')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

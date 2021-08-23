@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class LuckerdogsmodelConfig(AppConfig):
+class db_model_config(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'luckerdogsFront'
+    name = 'db_model'
