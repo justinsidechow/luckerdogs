@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import db_model_serializer
-from .models import db_model
+from .serializers import DBModelSerializer
+from .models import DBModel
 
 # Create your views here.
 
-class db_model_view(viewsets.ModelViewSet):
-    serializer_class = db_model_serializer
-    queryset = db_model.objects.all()
+class DBModelView(viewsets.ModelViewSet):
+    serializer_class = DBModelSerializer
+    queryset = DBModel.objects.all()

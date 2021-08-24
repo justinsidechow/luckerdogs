@@ -19,7 +19,7 @@ from rest_framework import routers
 from db_model import views
 
 router = routers.DefaultRouter()
-router.register(r'db_model', views.db_model_view, 'db_model')
+router.register(r'db_model', views.DBModelView, 'db_model')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

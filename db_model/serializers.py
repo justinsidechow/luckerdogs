@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import db_model
+from .models import DBModel
 
-class db_model_serializer(serializers.ModelSerializer):
+class DBModelSerializer(serializers.ModelSerializer):
     class Meta:
-        model = db_model
+        model = DBModel
         fields = ('id', 'title', 'description', 'completed')

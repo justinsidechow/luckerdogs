@@ -9,8 +9,7 @@ __pycache__/
 migrations/
 backend/settings.py
 db.sqlite3
-frontend/yarn.lock
-package-lock.json
+
 
 # testing
 /coverage
