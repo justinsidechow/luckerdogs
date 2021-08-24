@@ -7,10 +7,10 @@
 __pycache__/
 /settings.py
 migrations/
-Pipfile.lock
 backend/settings.py
 db.sqlite3
 frontend/yarn.lock
+package-lock.json
 
 # testing
 /coverage
