@@ -1,51 +1,71 @@
-import React, { Component } from "react";
-import "./sign_in";
+import React, { Component, useState, useEffect } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./sign_in.css";
 
-const sign_in = () => {
+// reference for base code: https://react-bootstrap.github.io/components/forms/
+
+function sign_in() {
+  function simulateNetworkRequest() {
+    return new Promise((resolve) => setTimeout(resolve, 2000));
+  }
+
+  function LoadingButton() {
+    const [isLoading, setLoading] = useState(false);
+
+    useEffect(() => {
+      if (isLoading) {
+        simulateNetworkRequest().then(() => {
+          setLoading(false);
+        });
+      }
+    }, [isLoading]);
+
+    const handleClick = () => setLoading(true);
+
+    return (
+      <Button
+        variant="primary"
+        className="submit-button"
+        size="lg"
+        disabled={isLoading}
+        onClick={!isLoading ? handleClick : null}
+      >
+        {isLoading ? "Loading…" : "Submit"}
+      </Button>
+    );
+  }
+
   return (
-    <main class="form-signin">
-      <form>
-        <img
-          class="mb-4"
-          src="../assets/brand/bootstrap-logo.svg"
-          alt=""
-          width="72"
-          height="57"
-        />
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-          />
-          <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-          />
-          <label for="floatingPassword">Password</label>
-        </div>
-
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> Remember me{" "}
-          </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
-          Sign in
-        </button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-      </form>
-    </main>
+    <Container>
+      <Row className="justify-content-md-center title">Sign in</Row>
+      <Row className="justify-content-md-center">
+        <Col md="auto">
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            <Form.Group
+              className="mb-3 check-box"
+              controlId="formBasicCheckbox"
+            >
+              <Form.Check type="checkbox" label="Remember me" />
+            </Form.Group>
+            <br></br>
+            <LoadingButton />
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
-};
+}
 
 export default sign_in;
