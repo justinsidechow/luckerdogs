@@ -6,6 +6,10 @@
   display: flex;
 }
 
+.column {
+  min-width: 20em;
+}
+
 .submit-button {
   margin: 1em;
   justify-content: center;
