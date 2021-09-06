@@ -2,24 +2,27 @@ import React, { Component, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./sign_in.css";
+import "./sign_up.css";
+
+import API from "../utils/API";
 
 // reference for base code: https://react-bootstrap.github.io/components/forms/
 
-class Sign_in extends Component {
+class Sign_up extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: false,
-      login: {
-        email: null,
-        password: null,
+      user: {
+        username: "",
+        email: "",
+        password: "",
         remember_me: false,
       },
     };
   }
 
-  componentDidMount() {}
+  async componentDidMount() {}
   componentWillUnmount() {}
   handleStatusChange(status) {}
 
@@ -28,7 +31,7 @@ class Sign_in extends Component {
   }
 
   handleSubmit = () => {
-    console.log(JSON.stringify(this.state.login));
+    console.log(JSON.stringify(this.state.user));
     this.setState({
       isLoading: true,
     });
@@ -39,10 +42,19 @@ class Sign_in extends Component {
     });
   };
 
+  handleUsernameChange = (event) => {
+    this.setState((prevState) => ({
+      user: {
+        ...prevState.user,
+        username: event.target.value,
+      },
+    }));
+  };
+
   handleEmailChange = (event) => {
     this.setState((prevState) => ({
-      login: {
-        ...prevState.login,
+      user: {
+        ...prevState.user,
         email: event.target.value,
       },
     }));
@@ -50,18 +62,21 @@ class Sign_in extends Component {
 
   handlePasswordChange = (event) => {
     this.setState((prevState) => ({
-      login: {
-        ...prevState.login,
+      user: {
+        ...prevState.user,
         password: event.target.value,
       },
     }));
+
+    //Your password must contain at least 8 characters.
+    //Your password can’t be entirely numeric.
   };
 
   handleRememberMeChange = (event) => {
     this.setState((prevState) => ({
-      login: {
-        ...prevState.login,
-        remember_me: !this.state.login.remember_me,
+      user: {
+        ...prevState.user,
+        remember_me: !this.state.user.remember_me,
       },
     }));
   };
@@ -69,10 +84,19 @@ class Sign_in extends Component {
   render() {
     return (
       <Container>
-        <Row className="justify-content-md-center title">Sign in</Row>
+        <Row className="justify-content-md-center title">Sign up</Row>
         <Row className="justify-content-md-center">
           <Col className="column" md="auto">
             <Form>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Username"
+                  value={this.state.username}
+                  onChange={this.handleUsernameChange}
+                />
+              </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
@@ -119,4 +143,4 @@ class Sign_in extends Component {
   }
 }
 
-export default Sign_in;
+export default Sign_up;

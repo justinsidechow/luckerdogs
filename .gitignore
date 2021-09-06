@@ -9,6 +9,7 @@ __pycache__/
 migrations/
 backend/settings.py
 db.sqlite3
+secret_key.txt
 
 
 # testing

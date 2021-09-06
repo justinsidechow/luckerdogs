@@ -5,13 +5,14 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Sign_in from "./components/sign_in";
+import Sign_up from "./components/sign_up";
 import navbar from "./components/navbar";
 
 function App() {
   return (
     <React.Fragment>
       <div className="App">
-        <Sign_in />
+        <Sign_up />
       </div>
     </React.Fragment>
   );
