@@ -58,7 +58,7 @@ class DBModel(models.Model):
     description = models.TextField()
     completed = models.BooleanField(default=False)
 
-    def _str_(self):
+    def __str__(self):
         return self.title
     
 class CoinToss(models.Model):
@@ -66,5 +66,5 @@ class CoinToss(models.Model):
     heads = models.PositiveIntegerField(default=0)
     tails = models.PositiveIntegerField(default=0)
     
-    def _str_(self):
+    def __int__(self):
         return self.heads
