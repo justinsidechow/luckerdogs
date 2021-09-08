@@ -10,6 +10,7 @@ The **language/frameworks/tools** used for this project were:
 - Frontend
     - Javascript
     - React.js
+    - Bootstrap
     - HTML
     - CSS
 - Backend
