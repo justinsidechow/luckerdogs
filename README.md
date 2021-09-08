@@ -6,7 +6,7 @@ A website to simulate real life events with the odds and animations presented to
 
 All examples would have a detailed expliation if the user choose to explore more to not just understand it visually but mathematically. 
 
-The **language/frameworks** used for this project were:
+The **language/frameworks/tools** used for this project were:
 - Frontend
     - Javascript
     - React.js
@@ -16,6 +16,7 @@ The **language/frameworks** used for this project were:
     - Python
     - Django
     - SQlite
+    - Coverage.py (testing)
     - AWS Lightsail
 
 ## Performance
