@@ -2,9 +2,9 @@
 
 ## Overview
 
-A website to simulate real life events with the odds and animations presented to put those numbers into perspective. It is difficult to make decisions statistically if one is not used to using such methods. Especially on decisions that require quick calulations. Therefore, this website is meant to help people visualize those statistical choices with a trial and error "gambling" effect to endice them to make better statistical with how often they get things wrong on certain tasks. Coin Toss would be the first visualization as it is an easy example to understand. Second would be cards, then more difficult examples like odds of a car crash compared to motorcycle in USA and beyond. Of course, I would also include the lottery odds and visualization. 
+A website to simulate real life events with the odds and animations presented to put those numbers into perspective. It is difficult to make decisions statistically if one is not used to using such methods. Especially on decisions that require quick calulations. Therefore, this website is meant to help people visualize those statistical choices with a trial and error "gambling" effect to endice them to make better statistical with how often they get things wrong on certain tasks. 
 
-All examples would have a detailed expliation if the user choose to explore more to not just understand it visually but mathematically. 
+Coin Toss would be the first visualization as it is an easy example to understand. Second would be cards, then more difficult examples like odds of a car crash compared to motorcycle in USA and beyond. Of course, I would also include the lottery odds and visualization. All examples would have a detailed expliation if the user choose to explore more to not just understand it visually but mathematically. 
 
 The **language/frameworks/tools** used for this project were:
 - Frontend
