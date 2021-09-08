@@ -22,8 +22,8 @@
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
-            42 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">42 run</button>
+            45 statements &nbsp;
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">45 run</button>
             <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">0 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
         </h2>
@@ -109,16 +109,22 @@
     <p id="t55" class="run"><span class="n"><a href="#t55">55</a></span><span class="t"><span class="key">class</span> <span class="nam">Test_Coin_Toss</span><span class="op">(</span><span class="nam">TestCase</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t56" class="pln"><span class="n"><a href="#t56">56</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t57" class="run"><span class="n"><a href="#t57">57</a></span><span class="t">    <span class="key">def</span> <span class="nam">test_coin_toss</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t58" class="run"><span class="n"><a href="#t58">58</a></span><span class="t">        <span class="nam">coin_toss</span> <span class="op">=</span> <span class="nam">CoinToss</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">create</span><span class="op">(</span><span class="nam">heads</span><span class="op">=</span><span class="num">1</span><span class="op">,</span> <span class="nam">tails</span><span class="op">=</span><span class="num">2</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t59" class="run"><span class="n"><a href="#t59">59</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">assertEqual</span><span class="op">(</span><span class="nam">coin_toss</span><span class="op">.</span><span class="nam">heads</span><span class="op">,</span> <span class="num">1</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t60" class="run"><span class="n"><a href="#t60">60</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">assertEqual</span><span class="op">(</span><span class="nam">coin_toss</span><span class="op">.</span><span class="nam">tails</span><span class="op">,</span> <span class="num">2</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t61" class="run"><span class="n"><a href="#t61">61</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">assertEqual</span><span class="op">(</span><span class="nam">int</span><span class="op">(</span><span class="nam">coin_toss</span><span class="op">)</span><span class="op">,</span> <span class="num">1</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t58" class="pln"><span class="n"><a href="#t58">58</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t59" class="run"><span class="n"><a href="#t59">59</a></span><span class="t">        <span class="nam">db</span> <span class="op">=</span> <span class="nam">get_user_model</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t60" class="run"><span class="n"><a href="#t60">60</a></span><span class="t">        <span class="nam">test_user</span> <span class="op">=</span> <span class="nam">db</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">create_user</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t61" class="pln"><span class="n"><a href="#t61">61</a></span><span class="t">            <span class="str">'luckerdog@luckerdog.com'</span><span class="op">,</span> <span class="str">'luckerdog'</span><span class="op">,</span> <span class="str">'luckypassword'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t62" class="pln"><span class="n"><a href="#t62">62</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t63" class="run"><span class="n"><a href="#t63">63</a></span><span class="t">        <span class="nam">coin_toss</span> <span class="op">=</span> <span class="nam">CoinToss</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">create</span><span class="op">(</span><span class="nam">user</span><span class="op">=</span><span class="nam">test_user</span><span class="op">,</span> <span class="nam">heads_lucky</span><span class="op">=</span><span class="num">1</span><span class="op">,</span> <span class="nam">heads_unlucky</span><span class="op">=</span><span class="num">2</span><span class="op">,</span> <span class="nam">tails_lucky</span><span class="op">=</span><span class="num">3</span><span class="op">,</span> <span class="nam">tails_unlucky</span><span class="op">=</span><span class="num">4</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t64" class="run"><span class="n"><a href="#t64">64</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">assertEqual</span><span class="op">(</span><span class="nam">coin_toss</span><span class="op">.</span><span class="nam">heads_lucky</span><span class="op">,</span> <span class="num">1</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t65" class="run"><span class="n"><a href="#t65">65</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">assertEqual</span><span class="op">(</span><span class="nam">coin_toss</span><span class="op">.</span><span class="nam">heads_unlucky</span><span class="op">,</span> <span class="num">2</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t66" class="run"><span class="n"><a href="#t66">66</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">assertEqual</span><span class="op">(</span><span class="nam">coin_toss</span><span class="op">.</span><span class="nam">tails_lucky</span><span class="op">,</span> <span class="num">3</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t67" class="run"><span class="n"><a href="#t67">67</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">assertEqual</span><span class="op">(</span><span class="nam">coin_toss</span><span class="op">.</span><span class="nam">tails_unlucky</span><span class="op">,</span> <span class="num">4</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
 </div>
 <div id="footer">
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io/en/6.0b1">coverage.py v6.0b1</a>,
-            created at 2021-09-07 20:41 -0700
+            created at 2021-09-08 03:50 -0700
         </p>
     </div>
 </div>

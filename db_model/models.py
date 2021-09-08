@@ -34,7 +34,7 @@ class CustomAccountManager(BaseUserManager):
         user.save()
         return user
 
-class NewUser(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(_('email address'), unique=True)
     user_name = models.CharField(max_length=150, unique=True)
@@ -62,9 +62,8 @@ class DBModel(models.Model):
         return self.title
     
 class CoinToss(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
-    heads = models.PositiveIntegerField(default=0)
-    tails = models.PositiveIntegerField(default=0)
-    
-    def __int__(self):
-        return self.heads
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_coin_toss")
+    heads_lucky = models.PositiveIntegerField(default=0)
+    heads_unlucky = models.PositiveIntegerField(default=0)
+    tails_lucky = models.PositiveIntegerField(default=0)
+    tails_unlucky = models.PositiveIntegerField(default=0)

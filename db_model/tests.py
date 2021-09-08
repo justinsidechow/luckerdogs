@@ -55,7 +55,13 @@ class Test_DB_Model(TestCase):
 class Test_Coin_Toss(TestCase):
     
     def test_coin_toss(self):
-        coin_toss = CoinToss.objects.create(heads=1, tails=2)
-        self.assertEqual(coin_toss.heads, 1)
-        self.assertEqual(coin_toss.tails, 2)
-        self.assertEqual(int(coin_toss), 1)
+        
+        db = get_user_model()
+        test_user = db.objects.create_user(
+            'luckerdog@luckerdog.com', 'luckerdog', 'luckypassword')
+        
+        coin_toss = CoinToss.objects.create(user=test_user, heads_lucky=1, heads_unlucky=2, tails_lucky=3, tails_unlucky=4)
+        self.assertEqual(coin_toss.heads_lucky, 1)
+        self.assertEqual(coin_toss.heads_unlucky, 2)
+        self.assertEqual(coin_toss.tails_lucky, 3)
+        self.assertEqual(coin_toss.tails_unlucky, 4)
