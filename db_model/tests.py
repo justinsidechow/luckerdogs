@@ -1,6 +1,11 @@
-from db_model.models import CoinToss, DBModel
+from django.http import response
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from db_model.models import CoinToss, DBModel
+
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase
 
 class UserAccountTests(TestCase):
 
@@ -65,3 +70,12 @@ class Test_Coin_Toss(TestCase):
         self.assertEqual(coin_toss.heads_unlucky, 2)
         self.assertEqual(coin_toss.tails_lucky, 3)
         self.assertEqual(coin_toss.tails_unlucky, 4)
+
+class PostTestCoinToss(APITestCase):
+    
+    def test_view_post(self):
+        url = reverse('db_model_url:CoinToss')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK) 
+        pass
+        

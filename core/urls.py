@@ -18,10 +18,13 @@ from django.urls import path, include
 from rest_framework import routers
 from db_model import views
 
-router = routers.DefaultRouter()
-router.register(r'db_model', views.DBModelView, 'db_model')
+#router = routers.DefaultRouter()
+#router.register(r'db_model', views.DBModelView, 'db_model')
+#router.register(r'User', views.UserView, 'User')
+#router.register(r'CoinToss', views.CoinTossView, basename='CoinToss')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('api/', include('db_model.urls', namespace='db_model')),
+    #path('api/', include(router.urls)),
 ]
