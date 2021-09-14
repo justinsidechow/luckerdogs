@@ -1,21 +1,25 @@
-import logo from "./logo.svg";
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import React from "react";
-import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-import Sign_in from "./components/sign_in";
-import Sign_up from "./components/sign_up";
-import navbar from "./components/navbar";
+//import Posts from "./components/Posts";
+//import PostLoadingComponent from "./components/PostLoading";
 
 function App() {
   return (
-    <React.Fragment>
-      <div className="App">
-        <Sign_up />
-      </div>
-    </React.Fragment>
+    <div className="App">
+      <h1>Latest Posts</h1>
+    </div>
   );
 }
-
 export default App;
+
+//<PostLoading isLoading={appState.loading} posts={appState.posts} />
+//const PostLoading = PostLoadingComponent(Posts);
+//useEffect(() => {
+//setAppState({ loading: true });
+//const apiUrl = `http://127.0.0.1:8000/api/`;
+//fetch(apiUrl)
+//  .then((data) => data.json())
+//  .then((posts) => {
+//    setAppState({ loading: false, posts: posts });
+//  });
+//}, [setAppState]);
