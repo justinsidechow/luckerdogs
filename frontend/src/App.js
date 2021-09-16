@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-//import Posts from "./components/Posts";
-//import PostLoadingComponent from "./components/PostLoading";
+import CoinTossAPI from "./components/coin_toss_api";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Latest Posts</h1>
-    </div>
-  );
+  return <div>{CoinTossAPI()}</div>;
 }
 export default App;
 
-//<PostLoading isLoading={appState.loading} posts={appState.posts} />
-//const PostLoading = PostLoadingComponent(Posts);
-//useEffect(() => {
-//setAppState({ loading: true });
-//const apiUrl = `http://127.0.0.1:8000/api/`;
-//fetch(apiUrl)
-//  .then((data) => data.json())
-//  .then((posts) => {
-//    setAppState({ loading: false, posts: posts });
-//  });
-//}, [setAppState]);
+//{console.log(appState.cointoss)}
+
+/*
+class connectionExample extends React.Component {
+  componentDidMount() {
+    const apiURL = "http://127.0.0.1:8000/api/cointoss";
+    fetch(apiURL)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }
+  render() {
+    return <div>Example Connection</div>;
+  }
+}
+
+export default connectionExample;
+*/
