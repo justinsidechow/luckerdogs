@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import UserCreationForm, UserChangeForm
-from .models import User, DBModel, CoinToss
+from .models import User, CoinToss
 from django.forms import TextInput, Textarea
 
 # Register your models here.
@@ -29,10 +29,6 @@ class UserAdminConfig(UserAdmin):
             'fields': ('email', 'user_name', 'password1', 'password2', 'is_active', 'is_staff')}
          ),
     )
-    
-
-class DBModelAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'completed')
     
 class CoinTossAdmin(admin.ModelAdmin):
     search_fields = ('user', 'heads_lucky', 'tails_lucky')

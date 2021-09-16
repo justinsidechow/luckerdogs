@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DBModel, User, CoinToss
+from .models import User, CoinToss
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -7,11 +7,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('user_name', 'email')
         
 class CoinTossSerializer(serializers.ModelSerializer):
+    
+    user_name = serializers.CharField(source='user.user_name', read_only=True)
     class Meta:
         model = CoinToss
-        fields = ('user', 'heads_lucky', 'heads_unlucky', 'tails_lucky', 'tails_unlucky')        
-
-class DBModelSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DBModel
-        fields = ('id', 'title', 'description', 'completed')
+        fields = ('user_name','heads_lucky', 'heads_unlucky', 'tails_lucky', 'tails_unlucky') 

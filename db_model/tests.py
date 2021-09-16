@@ -1,7 +1,7 @@
 from django.http import response
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from db_model.models import CoinToss, DBModel
+from db_model.models import CoinToss, User
 
 from django.urls import reverse
 from rest_framework import status
@@ -39,7 +39,6 @@ class UserAccountTests(TestCase):
             'testuser@user.com', 'username', 'password')
         self.assertEqual(user.email, 'testuser@user.com')
         self.assertEqual(user.user_name, 'username')
-        #self.assertEqual(user.first_name, 'firstname')
         self.assertFalse(user.is_superuser)
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_active)
@@ -47,17 +46,8 @@ class UserAccountTests(TestCase):
         with self.assertRaises(ValueError):
             db.objects.create_user(
                 email='', user_name='a', password='password')
-            
-class Test_DB_Model(TestCase):
-    
-    def test_db_model(self):
-        db_model = DBModel.objects.create(title="Title", description="Description", completed=True)
-        self.assertEqual(db_model.title, "Title")
-        self.assertEqual(db_model.description, "Description")
-        self.assertEqual(db_model.completed, True)
-        self.assertEqual(str(db_model), "Title")
 
-class Test_Coin_Toss(TestCase):
+class TestCoinToss(TestCase):
     
     def test_coin_toss(self):
         
@@ -71,7 +61,7 @@ class Test_Coin_Toss(TestCase):
         self.assertEqual(coin_toss.tails_lucky, 3)
         self.assertEqual(coin_toss.tails_unlucky, 4)
 
-class PostTestCoinToss(APITestCase):
+class TestCoinTossAPI(APITestCase):
     
     def test_view_post(self):
         url = reverse('db_model_url:CoinToss')
@@ -79,3 +69,15 @@ class PostTestCoinToss(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK) 
         pass
         
+    def test_create_post(self):
+        
+        db = get_user_model()
+        user = db.objects.create_user(
+            'testuser@user.com', 'username', 'password')
+        
+        data = {"user": user.id, "heads_lucky": "1", "heads_unlucky": "2",
+                "tails_lucky": "3", "tails_unlucky": "4"}
+        url = reverse('db_model_url:CoinToss')
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED) 
+        pass
