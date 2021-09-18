@@ -43,41 +43,7 @@ const CoinToss = (props) => {
   return (
     <React.Fragment>
       <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          {cointoss.map((cointoss) => {
-            return (
-              // Enterprise card is full width at sm breakpoint
-              <Grid item key={cointoss.heads_lucky} xs={12} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography
-                      gutterBottom
-                      variant="h6"
-                      component="h2"
-                      className={classes.postTitle}
-                    >
-                      {cointoss.user_name}
-                    </Typography>
-                    <div className={classes.postText}>
-                      <Typography
-                        component="p"
-                        color="textPrimary"
-                      ></Typography>
-                      <Typography variant="p" color="textSecondary">
-                        {cointoss.user_name}
-                      </Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Grid>
-            );
-          })}
-        </Grid>
+        <h1>Coin Toss</h1>
       </Container>
     </React.Fragment>
   );

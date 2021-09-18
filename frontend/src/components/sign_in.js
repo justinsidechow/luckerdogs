@@ -23,7 +23,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Luckerdogs
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
