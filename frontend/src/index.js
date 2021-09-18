@@ -5,6 +5,7 @@ import "./index.css";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import App from "./App";
 import Header from "./components/header";
+import CoinTossAPIFetch from "./components/coin_toss_api_fetch";
 import Footer from "./components/footer";
 
 const routing = (
@@ -13,6 +14,7 @@ const routing = (
       <Header />
       <Switch>
         <Route exact path="/" component={App} />
+        <Route exact path="/coin-toss" component={CoinTossAPIFetch} />
       </Switch>
       <Footer />
     </React.StrictMode>

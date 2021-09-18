@@ -8,20 +8,12 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import HomePage from "./components/home_page";
-import CoinTossAPI from "./components/coin_toss_api";
 
 function App() {
   return (
     <div className="App">
       <React.Fragment>
-        <Router>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route exact path="/coin-toss">
-            <CoinTossAPI />
-          </Route>
-        </Router>
+        <HomePage />
       </React.Fragment>
     </div>
   );
