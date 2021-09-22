@@ -26,5 +26,6 @@ from db_model import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('db_model.urls', namespace='db_model')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     #path('api/', include(router.urls)),
 ]

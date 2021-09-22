@@ -5,9 +5,7 @@
 /.pnp
 .pnp.js
 __pycache__/
-/settings.py
 migrations/
-backend/settings.py
 db.sqlite3
 secret_key.txt
 

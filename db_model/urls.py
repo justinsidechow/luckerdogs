@@ -1,7 +1,7 @@
 from os import name
 from django.urls import path, include
 from rest_framework import routers
-from .views import CoinTossView, UserView
+from .views import CoinTossView, CoinTossViewDetail, UserView
 
 app_name = 'db_model_url'
 
@@ -12,6 +12,7 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('cointoss', CoinTossView.as_view(), name='CoinToss'),
+    path('cointoss/<int:pk>/', CoinTossViewDetail.as_view(), name='CoinTossDetailCreate'),
     path('user', UserView.as_view(), name='User')
     #path('api/', include(router.urls)),
 ]
