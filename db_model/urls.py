@@ -11,8 +11,9 @@ router = routers.DefaultRouter()
 #router.register(r'CoinToss', views.CoinTossView, basename='CoinToss')
 
 urlpatterns = [
-    path('cointoss', CoinTossView.as_view(), name='CoinToss'),
-    path('cointoss/<int:pk>/', CoinTossViewDetail.as_view(), name='CoinTossDetailCreate'),
+    path('coin-toss', CoinTossView.as_view(), name='CoinToss'),
+    path('coin-toss/<int:pk>/', CoinTossViewDetail.as_view(),
+         name='CoinTossDetailCreate'),
     path('user', UserView.as_view(), name='User')
     #path('api/', include(router.urls)),
 ]
