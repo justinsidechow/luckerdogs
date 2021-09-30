@@ -5,3 +5,12 @@ pip install coverage
 coverage run manage.py test
 coverage html
 pip install djangorestframework
+pip install djangorestframework-simplejwt
+
+npx create-react-app frontend .
+npm start
+npm install react-router-djangorestframework
+npm install @material-ui/core
+pip install django-cors-headers
+npm install axios
+
