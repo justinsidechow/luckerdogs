@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({}));
 
 const CoinToss = (props) => {
   let { cointoss } = props;
-
+  console.log(cointoss);
   const classes = useStyles();
   if (!cointoss || cointoss.length === 0) {
     return <p>Can not find any posts, sorry</p>;
