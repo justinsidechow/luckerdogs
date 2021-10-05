@@ -20,7 +20,7 @@ class CoinTossUserWritePermission(BasePermission):
         return obj.user == request.user
 
 class CoinTossView(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     serializer_class = CoinTossSerializer
     queryset = CoinToss.objects.all()
     pass
