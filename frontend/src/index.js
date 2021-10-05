@@ -7,6 +7,9 @@ import App from "./App";
 import Header from "./components/header";
 import CoinTossAPIFetch from "./components/coin_toss_api_fetch";
 import Footer from "./components/footer";
+import Register from "./components/register";
+import Login from "./components/login";
+import Logout from "./components/logout";
 
 const routing = (
   <Router>
@@ -14,6 +17,9 @@ const routing = (
       <Header />
       <Switch>
         <Route exact path="/" component={App} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
         <Route exact path="/coin-toss" component={CoinTossAPIFetch} />
       </Switch>
       <Footer />

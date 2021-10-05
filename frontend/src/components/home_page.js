@@ -13,6 +13,11 @@ import "./home_page.css";
 
 function HomePage() {
   const useStyles = makeStyles((theme) => ({
+    container: {},
+    grid: {
+      justifyContent: "center",
+      marginBottom: "1em",
+    },
     link: {
       margin: theme.spacing(1, 1.5),
     },
@@ -43,6 +48,7 @@ function HomePage() {
     ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
     ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
     ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
+    ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
   ];
 
   // Returns all the odds-game within a Grid-Card display.
@@ -59,8 +65,8 @@ function HomePage() {
   return (
     <React.Fragment>
       <h1 className="title">How lucky are you?</h1>
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
+      <Container maxWidth="md" component="main" className={classes.container}>
+        <Grid container spacing={5} alignItems="flex" className={classes.grid}>
           {home_grids.map((home_grids) => {
             return (
               // Enterprise card is full width at sm breakpoint
