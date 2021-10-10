@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework import viewsets, generics
+from rest_framework.response import Response
 from rest_framework.permissions import SAFE_METHODS, BasePermission, IsAdminUser, DjangoModelPermissions, IsAuthenticatedOrReadOnly, IsAuthenticated
 from .serializers import CoinTossSerializer
 from .models import CoinToss
 
 # Create your views here.
-
 
 class CoinTossUserWritePermission(BasePermission):
     message = 'Editing posts is restricted to the author only.'
@@ -19,15 +19,67 @@ class CoinTossUserWritePermission(BasePermission):
 
         return obj.user == request.user
 
-class CoinTossView(generics.ListCreateAPIView):
-    #permission_classes = [IsAuthenticated]
-    serializer_class = CoinTossSerializer
+class CoinTossList(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = CoinToss.objects.all()
-    pass
+    
+    def list(self, request):
+        serializer_class = CoinTossSerializer(self.queryset, many=True)
+        return Response(serializer_class.data)
+    
+    def retrieve(self, request, pk=None):
+        coin_toss = get_object_or_404(self.queryset, pk=pk)
+        serializer_class = CoinTossSerializer(coin_toss)
+        return Response(serializer_class.data)
+        
+
+# class CoinTossView(generics.ListCreateAPIView):
+#     #permission_classes = [IsAuthenticated]
+#     serializer_class = CoinTossSerializer
+#     queryset = CoinToss.objects.all()
+#     pass
 
 
-class CoinTossViewDetail(generics.RetrieveUpdateDestroyAPIView, CoinTossUserWritePermission):
-    permission_classes = [CoinTossUserWritePermission]
-    serializer_class = CoinTossSerializer
-    queryset = CoinToss.objects.all()
-    pass
+# class CoinTossViewDetail(generics.RetrieveUpdateDestroyAPIView, CoinTossUserWritePermission):
+#     permission_classes = [CoinTossUserWritePermission]
+#     serializer_class = CoinTossSerializer
+#     queryset = CoinToss.objects.all()
+#     pass
+
+ # def list(self, request):
+    #     pass
+
+    # def create(self, request):
+    #     pass
+
+    # def retrieve(self, request, pk=None):
+    #     pass
+
+    # def update(self, request, pk=None):
+    #     pass
+
+    # def partial_update(self, request, pk=None):
+    #     pass
+
+    # def destroy(self, request, pk=None):
+    #     pass
+
+# Concrete View Classes
+# CreateAPIView
+# Used for create-only endpoints.
+# ListAPIView
+# Used for read-only endpoints to represent a collection of model instances.
+# RetrieveAPIView
+# Used for read-only endpoints to represent a single model instance.
+# DestroyAPIView
+# Used for delete-only endpoints for a single model instance.
+# UpdateAPIView
+# Used for update-only endpoints for a single model instance.
+# ListCreateAPIView
+# Used for read-write endpoints to represent a collection of model instances.
+# RetrieveUpdateAPIView
+# Used for read or update endpoints to represent a single model instance.
+# RetrieveDestroyAPIView
+# Used for read or delete endpoints to represent a single model instance.
+# RetrieveUpdateDestroyAPIView
+# Used for read-write-delete endpoints to represent a single model instance.
