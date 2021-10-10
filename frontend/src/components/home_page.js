@@ -46,9 +46,6 @@ function HomePage() {
   const home_grids = [
     ["Coin Toss", "Feeling lucky punk?", "/spinning_coin.mp4", "/coin-toss"],
     ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
-    ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
-    ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
-    ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
   ];
 
   // Returns all the odds-game within a Grid-Card display.
