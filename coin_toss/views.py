@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from rest_framework import viewsets, generics, filters
+from rest_framework import viewsets, generics, filters, permissions
 from rest_framework.response import Response
 from rest_framework.permissions import SAFE_METHODS, BasePermission, AllowAny, IsAdminUser, DjangoModelPermissions, IsAuthenticatedOrReadOnly, IsAuthenticated
 from .serializers import CoinTossSerializer
@@ -59,7 +59,29 @@ class CoinTossSearch(generics.ListAPIView):
     queryset = CoinToss.objects.all()
     serializer_class = CoinTossSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['^heads_lucky']
+    search_fields = ['^user_name']
+    
+# Post Admin
+
+class CreateCoinToss(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = CoinToss.objects.all()
+    serializer_class = CoinTossSerializer
+
+class AdminCoinTossDetail(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = CoinToss.objects.all()
+    serializer_class = CoinTossSerializer
+
+class EditCoinToss(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = CoinTossSerializer
+    queryset = CoinToss.objects.all()
+
+class DeleteCoinToss(generics.RetrieveDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = CoinTossSerializer
+    queryset = CoinToss.objects.all()
 
 # class CoinTossList(viewsets.ViewSet):
 #     permission_classes = [IsAuthenticated]

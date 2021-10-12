@@ -17,7 +17,7 @@ class CoinToss(models.Model):
         ('heads_unlucky', 'Heads_unlucky'),
     )
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_coin_toss", unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_coin_toss", unique=True)
     user_name = models.CharField(max_length=150, default="")
     heads_lucky = models.PositiveIntegerField(default=0)
     heads_unlucky = models.PositiveIntegerField(default=0)
