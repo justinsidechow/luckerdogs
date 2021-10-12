@@ -12,11 +12,13 @@ class CoinToss(models.Model):
             return super().get_queryset().filter(status='heads_lucky')
         
     options = (
+        ('user', 'User'),
         ('heads_lucky', 'Heads_unlucky'),
         ('heads_unlucky', 'Heads_unlucky'),
     )
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_coin_toss")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_coin_toss", unique=True)
+    user_name = models.CharField(max_length=150, default="")
     heads_lucky = models.PositiveIntegerField(default=0)
     heads_unlucky = models.PositiveIntegerField(default=0)
     tails_lucky = models.PositiveIntegerField(default=0)
