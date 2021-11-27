@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosInstance from "../axios";
+import axiosInstance from "../../axios";
 import { useHistory } from "react-router-dom";
 //MaterialUI
 import Avatar from "@material-ui/core/Avatar";
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function LogIn() {
   const history = useHistory();
   const initialFormData = Object.freeze({
     email: "",
@@ -65,8 +65,8 @@ export default function SignIn() {
         axiosInstance.defaults.headers["Authorization"] =
           "JWT " + localStorage.getItem("access_token");
         history.push("/");
-        //console.log(res);
-        //console.log(res.data);
+        console.log(res);
+        console.log(res.data);
       });
   };
 
@@ -78,7 +78,7 @@ export default function SignIn() {
       <div className={classes.paper}>
         <Avatar className={classes.avatar}></Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Login
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -126,7 +126,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

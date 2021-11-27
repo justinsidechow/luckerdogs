@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosInstance from "../axios";
+import axiosInstance from "../../axios";
 import { useHistory } from "react-router-dom";
 //MaterialUI
 import Avatar from "@material-ui/core/Avatar";
@@ -77,7 +77,7 @@ export default function SignUp() {
       <div className={classes.paper}>
         <Avatar className={classes.avatar}></Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Register
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -137,7 +137,7 @@ export default function SignUp() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
