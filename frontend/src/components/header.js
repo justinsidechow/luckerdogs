@@ -21,12 +21,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header() {
+function Header(props) {
   const classes = useStyles();
-  const state = {
-    isLoggedIn: localStorage.getItem("refresh_token") ? true : false,
-  };
-  console.log(state.isLoggedIn);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("refresh_token") ? true : false
+  );
+
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("refresh_token") ? true : false);
+  });
+
+  console.log(isLoggedIn);
 
   return (
     <React.Fragment>
