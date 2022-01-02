@@ -4,10 +4,8 @@ from rest_framework import routers
 from .views import UserView
 from .views import CustomUserCreate, BlacklistTokenUpdateView
 
-app_name = 'users'
+app_name = "users"
 
 urlpatterns = [
-    path('create/', CustomUserCreate.as_view(), name="create_user"),
-    path('logout/blacklist/', BlacklistTokenUpdateView.as_view(),
-         name='blacklist')
+    path("create/", CustomUserCreate.as_view(), name="create_user"),
 ]

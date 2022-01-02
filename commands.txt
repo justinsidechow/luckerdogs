@@ -14,3 +14,5 @@ npm install @material-ui/core
 pip install django-cors-headers
 npm install axios
 
+store access token in memory only
+store refresh token as a Cookie with HttpOnly flag
