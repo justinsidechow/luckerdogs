@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosInstance from "../../axios";
 import { useHistory } from "react-router-dom";
 //MaterialUI
@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { getLogin, getSession } from "../auth/auth_function";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,38 +37,120 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LogIn() {
   const history = useHistory();
-  const initialFormData = Object.freeze({
+  const initialState = {
+    csrf: "",
     email: "",
     password: "",
-  });
+    error: "",
+    isAuthenticated: false,
+  };
+  const [state, setState] = useState(initialState);
 
-  const [formData, updateFormData] = useState(initialFormData);
+  useEffect(() => {
+    getSession();
+  }, []);
 
-  const handleChange = (e) => {
-    updateFormData({
-      ...formData,
-      [e.target.name]: e.target.value.trim(),
-    });
+  const getCSRF = () => {
+    fetch("/api/csrf/", {
+      credentials: "same-origin",
+    })
+      .then((res) => {
+        let csrfToken = res.headers.get("X-CSRFToken");
+        setState({ csrf: csrfToken });
+
+        console.log("res", res);
+        console.log("res.headers", res.headers.get("X-CSRFToken"));
+        console.log("csrfToken", csrfToken);
+        console.log("state.csrfToken", state.csrf);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-
-    axiosInstance
-      .post(`token/`, {
-        email: formData.email,
-        password: formData.password,
+  const getSession = () => {
+    fetch("/api/session/", {
+      credentials: "same-origin", //"same-origin"
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.isAuthenticated) {
+          setState({ isAuthenticated: true });
+        } else {
+          setState({ isAuthenticated: false });
+          getCSRF();
+        }
+        console.log("getSession - isAuthenticated", state.isAuthenticated);
       })
-      .then((res) => {
-        localStorage.setItem("access_token", res.data.access);
-        localStorage.setItem("refresh_token", res.data.refresh);
-        axiosInstance.defaults.headers["Authorization"] =
-          "JWT " + localStorage.getItem("access_token");
-        history.push("/");
-        console.log(res);
-        console.log(res.data);
+      .catch((err) => {
+        console.log(err);
       });
+  };
+
+  const login = (event) => {
+    event.preventDefault();
+    console.log("email: ", state.email);
+    console.log("password: ", state.password);
+    console.log("csrf: ", state.csrf);
+    console.log("isAuth: ", state.isAuthenticated);
+    console.log("error: ", state.error);
+    fetch("/api/login/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": state.csrf,
+        credentials: 'include',
+      },
+      credentials: "same-origin",
+      body: JSON.stringify({
+        email: state.email,
+        password: state.password,
+      }),
+    })
+      .then(isResponseOk)
+      .then((data) => {
+        console.log(data);
+        setState({
+          isAuthenticated: true,
+          email: "",
+          password: "",
+          error: "",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setState({ error: "Wrong email or password." });
+      });
+  };
+
+  const handlePasswordChange = (event) => {
+    setState({ password: event.target.value });
+  };
+
+  const handleEmailChange = (event) => {
+    setState({ email: event.target.value });
+  };
+
+  const isResponseOk = (response) => {
+    if (response.status >= 200 && response.status <= 299) {
+      return response.json();
+    } else {
+      throw Error(response.statusText);
+    }
+  };
+
+  //console.log(login);
+  //console.log(session);
+
+  //console.log(formData.isAuthenticated);
+  //console.log(formData.csrf);
+
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value.trim(),
+    });
   };
 
   const classes = useStyles();
@@ -92,6 +175,7 @@ export default function LogIn() {
             autoComplete="email"
             autoFocus
             onChange={handleChange}
+            onSubmit={login}
           />
           <TextField
             variant="outlined"
@@ -110,12 +194,11 @@ export default function LogIn() {
             label="Remember me"
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={handleSubmit}
+            onClick={login}
           >
             Sign In
           </Button>

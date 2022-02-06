@@ -40,6 +40,7 @@ export default function SignUp() {
     email: "",
     username: "",
     password: "",
+    confirm_password: "",
   });
 
   const [formData, updateFormData] = useState(initialFormData);
@@ -56,17 +57,19 @@ export default function SignUp() {
     e.preventDefault();
     console.log(formData);
 
-    axiosInstance
-      .post(`user/create/`, {
-        email: formData.email,
-        user_name: formData.username,
-        password: formData.password,
-      })
-      .then((res) => {
-        history.push("/login");
-        console.log(res);
-        console.log(res.data);
-      });
+    if (formData.password == formData.confirm_password) {
+      axiosInstance
+        .post(`user/create/`, {
+          email: formData.email,
+          user_name: formData.username,
+          password: formData.password,
+        })
+        .then((res) => {
+          history.push("/login");
+          console.log(res);
+          console.log(res.data);
+        });
+    }
   };
 
   const classes = useStyles();
@@ -119,11 +122,26 @@ export default function SignUp() {
               />
             </Grid>
             <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="confirm_password"
+                label="Confirm Password"
+                type="password"
+                id="confirm_password"
+                autoComplete="current-password"
+                onChange={handleChange}
+              />
+            </Grid>
+            {/* 
+            <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
+          */}
           </Grid>
           <Button
             type="submit"
@@ -138,7 +156,7 @@ export default function SignUp() {
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
-                Already have an account? Sign in
+                Already have an account? Sign In
               </Link>
             </Grid>
           </Grid>
