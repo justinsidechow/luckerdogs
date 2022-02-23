@@ -1,9 +1,0 @@
-.card-animation {
-  transform: 0;
-  transition: 0.2s;
-}
-
-.card-animation:hover {
-  transform: translate(0, -0.5em);
-  transition: 0.2s ease-in-out;
-}

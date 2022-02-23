@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "bootstrap": "^5.1.0",
-    "django": "^1.0.0"
-  }
-}

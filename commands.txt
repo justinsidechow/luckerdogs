@@ -1,0 +1,13 @@
+Build containers
+docker-compose -f docker-compose-dev.yml build
+Please notice that we are using -f docker-compose-dev.yml - it is to point custom yml file. By default docker-compose is reading yml configuration file from docker-compose.yml (we keep default name for production setting).
+
+Run containers
+docker-compose -f docker-compose-dev.yml up
+
+Stop containers
+docker-compose -f docker-compose-dev.yml down
+You can also use Ctrl+C to stop containers if not running in the background.
+
+Build and run containers
+docker-compose -f docker-compose-dev.yml up --build
