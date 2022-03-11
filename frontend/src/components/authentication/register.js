@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,6 +10,13 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { FormControl } from "@material-ui/core";
+import axios from "axios";
+import { toast } from "react-toastify";
+import {
+  CREATE_USER_ERROR,
+  CREATE_USER_SUBMITTED,
+  CREATE_USER_SUCCESS,
+} from "../signup/SignupTypes";
 
 const useStyles = makeStyles((theme) => ({
   container: {},
@@ -34,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Register() {
-  const history = useNavigate();
   const initialState = Object.freeze({
     email: "",
     username: "",
@@ -52,16 +58,48 @@ function Register() {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (dispatch) => {
     const userData = {
       username: state.username,
       password: state.password,
       confirm_password: state.confirm_password,
     };
-    console.log(
-      "Sign up " + userData.username + ": " + userData.password + ": ",
-      userData.confirm_password
-    );
+
+    if (userData.password !== userData.confirm_password) {
+      toast.error("The password and confirm password do not match.");
+    } else {
+      axios
+        .post("/api/v1/users/", userData)
+        .then((response) => {
+          toast.success(
+            "Account for " +
+              userData.username +
+              " created successfully. Please login."
+          );
+          <Navigate to="/login" />;
+        })
+        .catch((error) => {
+          if (!error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            toast.error(JSON.stringify(error.message));
+          } else if (error.message) {
+            const keys = Object.keys(error.response.data);
+            const values = Object.values(error.response.data);
+            const result = Object.assign(
+              ...keys.map((k, i) => ({ [k]: values[i] }))
+            );
+            for (let key in result) {
+              //Cleaning up the array message by removing ',' from API so it looks cleaner
+              let message = String(result[key]).replace(",", " ");
+              toast.error(key + " - " + message);
+            }
+          } else {
+            // all other error
+            toast.error(JSON.stringify(error));
+          }
+        });
+    }
   };
 
   const classes = useStyles();

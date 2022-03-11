@@ -7,6 +7,10 @@ import Footer from "./components/footer";
 import Register from "./components/authentication/register";
 import LogIn from "./components/authentication/login";
 import LogOut from "./components/authentication/logout";
+import { ToastContainer } from "react-toastify";
+
+import axios from "axios";
+axios.defaults.baseURL = "http://127.0.0.1:8000";
 
 function App() {
   return (
@@ -23,6 +27,7 @@ function App() {
           </Routes>
           <Footer />
         </Root>
+        <ToastContainer hideProgressBar={true} newestOnTop={true} />
       </BrowserRouter>
     </div>
   );
