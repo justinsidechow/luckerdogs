@@ -4,8 +4,8 @@ import Root from "./Root";
 import HomePage from "./components/home_page";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import Register from "./components/authentication/register";
-import LogIn from "./components/authentication/login";
+import Register from "./components/signup/register";
+import LogIn from "./components/login/login";
 import LogOut from "./components/authentication/logout";
 import { ToastContainer } from "react-toastify";
 
@@ -26,8 +26,8 @@ function App() {
             <Route path="*">Ups</Route>
           </Routes>
           <Footer />
+          <ToastContainer hideProgressBar={true} newestOnTop={true} />
         </Root>
-        <ToastContainer hideProgressBar={true} newestOnTop={true} />
       </BrowserRouter>
     </div>
   );
