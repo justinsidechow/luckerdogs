@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Register(props) {
+function SignUp(props) {
   const initialState = Object.freeze({
     email: "",
     username: "",
@@ -162,7 +161,7 @@ function Register(props) {
   );
 }
 
-Register.propTypes = {
+SignUp.propTypes = {
   signupNewUser: PropTypes.func.isRequired,
   createUser: PropTypes.object.isRequired,
 };
@@ -173,4 +172,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   signupNewUser,
-})(Register);
+})(SignUp);
