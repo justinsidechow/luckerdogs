@@ -7,6 +7,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { NavLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from "./login/LoginActions";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -22,6 +25,20 @@ const useStyles = makeStyles((theme) => ({
 
 function Header(props) {
   const classes = useStyles();
+  const initialState = {
+    user: "",
+    auth: false,
+    error: "",
+  };
+  const [state, setState] = useState(initialState);
+
+  useEffect(() => {
+    setState({ auth: localStorage.getItem("token") ? true : false });
+  }, [localStorage.getItem("token")]);
+
+  const onLogOutClick = () => {
+    props.logout();
+  };
 
   return (
     <React.Fragment>
@@ -48,123 +65,57 @@ function Header(props) {
               Luckerdogs
             </Link>
           </Typography>
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/register"
-          >
-            Register
-          </Button>
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/login"
-          >
-            Login
-          </Button>
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/logout"
-          >
-            Logout
-          </Button>
+          {!state.auth && (
+            <Button
+              href="#"
+              color="primary"
+              variant="outlined"
+              className={classes.link}
+              component={NavLink}
+              to="/register"
+            >
+              Register
+            </Button>
+          )}
+          {!state.auth && (
+            <Button
+              href="#"
+              color="primary"
+              variant="outlined"
+              className={classes.link}
+              component={NavLink}
+              to="/login"
+            >
+              Login
+            </Button>
+          )}
+          {state.auth && (
+            <Button
+              href="#"
+              color="primary"
+              variant="outlined"
+              className={classes.link}
+              component={NavLink}
+              to="/"
+              onClick={onLogOutClick}
+            >
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </React.Fragment>
   );
 }
 
-// function Header() {
-//   const classes = useStyles();
+Header.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
 
-//   function AuthButtons() {
-//     //const access_token = localStorage.getItem("access_token");
-//     const refresh_token = localStorage.getItem("refresh_token");
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
-//     //console.log(access_token);
-//     console.log(refresh_token);
-
-//     if (refresh_token != null) {
-//       return (
-//         <Button
-//           href="#"
-//           color="primary"
-//           variant="outlined"
-//           className={classes.link}
-//           component={NavLink}
-//           to="/logout"
-//         >
-//           Logout
-//         </Button>
-//       );
-//     } else {
-//       return (
-//         <div>
-//           <Button
-//             href="#"
-//             color="primary"
-//             variant="outlined"
-//             className={classes.link}
-//             component={NavLink}
-//             to="/register"
-//           >
-//             Register
-//           </Button>
-//           <Button
-//             href="#"
-//             color="primary"
-//             variant="outlined"
-//             className={classes.link}
-//             component={NavLink}
-//             to="/login"
-//           >
-//             Login
-//           </Button>
-//         </div>
-//       );
-//     }
-//   }
-
-//   return (
-//     <React.Fragment>
-//       <CssBaseline />
-//       <AppBar
-//         position="static"
-//         color="default"
-//         elevation={0}
-//         className={classes.appBar}
-//       >
-//         <Toolbar className={classes.toolbar}>
-//           <Typography
-//             variant="h6"
-//             color="inherit"
-//             noWrap
-//             className={classes.toolbarTitle}
-//           >
-//             <Link
-//               component={NavLink}
-//               to="/"
-//               underline="none"
-//               color="textPrimary"
-//             >
-//               Luckerdogs
-//             </Link>
-//           </Typography>
-//           {AuthButtons()}
-//         </Toolbar>
-//       </AppBar>
-//     </React.Fragment>
-//   );
-// }
-
-export default Header;
+export default connect(mapStateToProps, {
+  logout,
+})(Header);
