@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -8,10 +8,12 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import "./home_page.css";
-import { render } from "react-dom";
+import "./homePage.css";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { login } from "./login/LoginActions";
 
-function HomePage() {
+function HomePage(props) {
   const useStyles = makeStyles((theme) => ({
     container: {},
     backgroundColor: {
@@ -52,6 +54,8 @@ function HomePage() {
 
   const classes = useStyles();
 
+  useEffect(() => {}, []);
+
   const home_grids = [
     ["Coin Toss", "Feeling lucky punk?", "/spinning_coin.mp4", "/coin-toss"],
     ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
@@ -83,40 +87,38 @@ function HomePage() {
               return (
                 // Enterprise card is full width at sm breakpoint
                 <Grid item key={home_grids} xs={10} md={4}>
-                  <Link className="Link" to={home_grids[3]}>
-                    <div className="card-animation">
-                      <Card>
-                        <CardActionArea>
-                          <CardMedia
-                            component="video"
-                            image={process.env.PUBLIC_URL + home_grids[2]}
-                            title="Coin Spining"
-                            autoPlay
-                            loop
-                          />
-                          <CardContent>
+                  <div className="card-animation">
+                    <Card>
+                      <CardActionArea>
+                        <CardMedia
+                          component="video"
+                          image={process.env.PUBLIC_URL + home_grids[2]}
+                          title="Coin Spining"
+                          autoPlay
+                          loop
+                        />
+                        <CardContent>
+                          <Typography
+                            gutterBottom
+                            variant="h6"
+                            component="h2"
+                            className={classes.postTitle}
+                          >
+                            {home_grids[0].substr(0, 50)}
+                          </Typography>
+                          <div className={classes.postText}>
                             <Typography
-                              gutterBottom
-                              variant="h6"
-                              component="h2"
-                              className={classes.postTitle}
-                            >
-                              {home_grids[0].substr(0, 50)}
+                              component="p"
+                              color="textPrimary"
+                            ></Typography>
+                            <Typography variant="p" color="textSecondary">
+                              {home_grids[1].substr(0, 60)}
                             </Typography>
-                            <div className={classes.postText}>
-                              <Typography
-                                component="p"
-                                color="textPrimary"
-                              ></Typography>
-                              <Typography variant="p" color="textSecondary">
-                                {home_grids[1].substr(0, 60)}
-                              </Typography>
-                            </div>
-                          </CardContent>
-                        </CardActionArea>
-                      </Card>
-                    </div>
-                  </Link>
+                          </div>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </div>
                 </Grid>
               );
             })}
@@ -127,4 +129,15 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+HomePage.propTypes = {
+  login: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
+  login,
+})(HomePage);

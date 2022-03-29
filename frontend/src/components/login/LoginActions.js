@@ -65,7 +65,16 @@ export const getCurrentUser = (redirectTo) => (dispatch) => {
           dispatch(push("/resend_activation"));
         }
       } else {
-        toastOnError(error);
+        const keys = Object.keys(error.response.data);
+        const values = Object.values(error.response.data);
+        const result = Object.assign(
+          ...keys.map((k, i) => ({ [k]: values[i] }))
+        );
+        for (let key in result) {
+          //Cleaning up the array message by removing ',' from API so it looks cleaner
+          let message = String(result[key]).replace(",", " ");
+          toast.error(key + " - " + message);
+        }
       }
     });
 };
@@ -79,6 +88,7 @@ export const setCurrentUser = (user, redirectTo) => (dispatch) => {
 
   if (redirectTo !== "") {
     dispatch(push(redirectTo));
+    console.log("dispatched: " + redirectTo);
   }
 };
 

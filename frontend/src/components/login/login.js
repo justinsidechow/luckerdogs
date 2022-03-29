@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 //MaterialUI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -16,6 +17,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "./LoginActions";
 
+//material-ui styling for the forms
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -55,13 +57,7 @@ function LogIn(props) {
     });
   };
 
-  const isResponseOk = (response) => {
-    if (response.status >= 200 && response.status <= 299) {
-      return response.json();
-    } else {
-      throw Error(response.statusText);
-    }
-  };
+  useEffect(() => {}, []);
 
   const onLoginClick = () => {
     const userData = {
@@ -69,6 +65,7 @@ function LogIn(props) {
       password: state.password,
     };
     props.login(userData, "/");
+    console.log("pushed");
   };
 
   const classes = useStyles();
@@ -81,7 +78,7 @@ function LogIn(props) {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <FormControl className={classes.form} noValidate>
+        <FormControl className={classes.form}>
           <Grid container spacing={2}>
             {/*
           <TextField
@@ -106,7 +103,6 @@ function LogIn(props) {
                 name="username"
                 label="Username"
                 autoComplete="username"
-                //value={state.username}
                 onChange={handleChange}
               />
             </Grid>
@@ -120,7 +116,6 @@ function LogIn(props) {
                 name="password"
                 label="Password"
                 autoComplete="current-password"
-                //value={state.password}
                 onChange={handleChange}
               />
             </Grid>

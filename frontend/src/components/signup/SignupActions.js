@@ -31,6 +31,7 @@ import {
   CREATE_USER_SUCCESS,
 } from "./SignupTypes";
 import { Navigate } from "react-router-dom";
+import { push } from "connected-react-router";
 
 export const signupNewUser = (userData) => (dispatch) => {
   dispatch({ type: CREATE_USER_SUBMITTED }); // set submitted state
@@ -43,7 +44,7 @@ export const signupNewUser = (userData) => (dispatch) => {
           " created successfully. Please login."
       );
       dispatch({ type: CREATE_USER_SUCCESS });
-      <Navigate to="/login" />;
+      dispatch(push("/login"));
     })
     .catch((error) => {
       if (error.resposne) {

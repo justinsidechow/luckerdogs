@@ -1,10 +1,10 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Switch } from "react-router";
 import Root from "./Root";
-import HomePage from "./components/home_page";
-import Header from "./components/header";
+import HomePage from "./components/homePage";
+import Header from "./components/header/header";
 import Footer from "./components/footer";
-import Register from "./components/signup/register";
+import SignUp from "./components/signup/signup";
 import LogIn from "./components/login/login";
 import LogOut from "./components/authentication/logout";
 import { ToastContainer } from "react-toastify";
@@ -15,20 +15,17 @@ axios.defaults.baseURL = "http://127.0.0.1:8000";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Root>
-          <Header />
-          <Routes>
-            <Route exact path="/" element={<HomePage />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/logout" element={<LogOut />} />
-            <Route path="*">Ups</Route>
-          </Routes>
-          <Footer />
-          <ToastContainer hideProgressBar={true} newestOnTop={true} />
-        </Root>
-      </BrowserRouter>
+      <Root>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/register" component={SignUp} />
+          <Route path="/login" component={LogIn} />
+          <Route path="/logout" component={LogOut} />
+        </Switch>
+        <ToastContainer hideProgressBar={true} newestOnTop={true} />
+        <Footer />
+      </Root>
     </div>
   );
 }
