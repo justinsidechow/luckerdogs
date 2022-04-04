@@ -88,7 +88,6 @@ export const setCurrentUser = (user, redirectTo) => (dispatch) => {
 
   if (redirectTo !== "") {
     dispatch(push(redirectTo));
-    console.log("dispatched: " + redirectTo);
   }
 };
 

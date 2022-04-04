@@ -10,7 +10,12 @@ import LogOut from "./components/authentication/logout";
 import { ToastContainer } from "react-toastify";
 
 import axios from "axios";
-axios.defaults.baseURL = "http://127.0.0.1:8000";
+
+if (window.location.origin === "http://localhost:3000") {
+  axios.defaults.baseURL = "http://127.0.0.1:8000";
+} else {
+  axios.defaults.baseURL = window.location.origin;
+}
 
 function App() {
   return (

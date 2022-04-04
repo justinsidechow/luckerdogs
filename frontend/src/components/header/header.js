@@ -16,7 +16,9 @@ function Header(props) {
       borderBottom: `1px solid ${theme.palette.divider}`,
     },
     title: {
-      backgroundColor: "transparent",
+      "&:hover": {
+        background: "transparent",
+      },
     },
     link: {
       margin: theme.spacing(1, 1.5),
@@ -73,9 +75,8 @@ function Header(props) {
             className={classes.toolbarTitle}
           >
             <Button
-              to="/"
+              variant="text"
               underline="none"
-              variant="raised"
               color="textPrimary"
               className={classes.title}
               onClick={onTitleClick}
