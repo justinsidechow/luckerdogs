@@ -1,6 +1,6 @@
 django==4.0.2
+djoser==2.1.0
 djangorestframework==3.13.1
+markdown==3.3.6
 django-filter==2.4.0
 django_cors_headers==3.5.0
-djoser==2.1.0
-markdown==3.3.6

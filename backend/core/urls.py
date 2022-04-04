@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 
 from users.urls import users_urlpatterns
+from coinToss.url import coinToss_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
 urlpatterns += users_urlpatterns
+urlpatterns += coinToss_urlpatterns

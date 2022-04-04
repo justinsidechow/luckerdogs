@@ -26,11 +26,11 @@ SECRET_KEY = 'django-insecure-76u=ien^ers=erv=9089k!fy&%-!(1!n=@g9dlvp*57d@n7%mn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://127.0.0.1:3000"
+    "http://127.0.0.1:3000",
 ]
 
 
@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'djoser',
     'users',
+    'coinToss',
+    'django_static',
 ]
 
 MIDDLEWARE = [
@@ -130,8 +132,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -149,3 +149,7 @@ REST_FRAMEWORK = {
 DJOSER = {
     "USER_ID_FIELD": "username"
 }
+
+MEDIA_URL = '/media/'
+STATIC_URL = '/django_static/'
+STATIC_ROOT = BASE_DIR / 'django_static'
