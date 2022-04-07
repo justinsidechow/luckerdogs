@@ -11,7 +11,8 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import "./homePage.css";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "./login/LoginActions";
+import { login } from "../login/LoginActions";
+import { GameList } from "../utils/GameList";
 
 function HomePage(props) {
   const useStyles = makeStyles((theme) => ({
@@ -56,10 +57,7 @@ function HomePage(props) {
 
   useEffect(() => {}, []);
 
-  const home_grids = [
-    ["Coin Toss", "Feeling lucky punk?", "/spinning_coin.mp4", "/coin-toss"],
-    ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
-  ];
+  const homeGrids = GameList;
 
   // Returns all the odds-game within a Grid-Card display.
   // home_grids[0] = title
@@ -83,16 +81,16 @@ function HomePage(props) {
             alignItems="flex"
             className={classes.grid}
           >
-            {home_grids.map((home_grids) => {
+            {homeGrids.map((homeGrids) => {
               return (
                 // Enterprise card is full width at sm breakpoint
-                <Grid item key={home_grids} xs={10} md={4}>
+                <Grid item key={homeGrids} xs={10} md={4}>
                   <div className="card-animation">
                     <Card>
                       <CardActionArea>
                         <CardMedia
                           component="video"
-                          image={process.env.PUBLIC_URL + home_grids[2]}
+                          image={process.env.PUBLIC_URL + homeGrids[2]}
                           title="Coin Spining"
                           autoPlay
                           loop
@@ -104,7 +102,7 @@ function HomePage(props) {
                             component="h2"
                             className={classes.postTitle}
                           >
-                            {home_grids[0].substr(0, 50)}
+                            {homeGrids[0].substr(0, 50)}
                           </Typography>
                           <div className={classes.postText}>
                             <Typography
@@ -112,7 +110,7 @@ function HomePage(props) {
                               color="textPrimary"
                             ></Typography>
                             <Typography variant="p" color="textSecondary">
-                              {home_grids[1].substr(0, 60)}
+                              {homeGrids[1].substr(0, 60)}
                             </Typography>
                           </div>
                         </CardContent>

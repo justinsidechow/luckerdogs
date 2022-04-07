@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
+import { GameList } from "./utils/GameList";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -23,7 +24,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="https://github.com/justinsidechow/luckerdogs">
         Luckerdogs
       </Link>{" "}
       {new Date().getFullYear()}
@@ -32,29 +33,21 @@ function Copyright() {
   );
 }
 
+let footerGameList = [];
+
+for (let x of GameList) {
+  footerGameList.push(x[0]);
+}
+console.log(footerGameList);
+
 const footers = [
   {
-    title: "Company",
-    description: ["Team", "History", "Contact us", "Locations"],
+    title: "Game List",
+    description: footerGameList,
   },
   {
-    title: "Features",
-    description: [
-      "Cool stuff",
-      "Random feature",
-      "Team feature",
-      "Developer stuff",
-      "Another one",
-    ],
-  },
-  {
-    title: "Resources",
-    description: [
-      "Resource",
-      "Resource name",
-      "Another resource",
-      "Final resource",
-    ],
+    title: "Contact",
+    description: ["Contact Info", "Contact Info"],
   },
   {
     title: "Legal",

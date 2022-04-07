@@ -1,13 +1,14 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 import Root from "./Root";
-import HomePage from "./components/homePage";
+import HomePage from "./components/home/homePage";
 import Header from "./components/header/header";
 import Footer from "./components/footer";
 import SignUp from "./components/signup/signup";
 import LogIn from "./components/login/login";
 import LogOut from "./components/authentication/logout";
 import { ToastContainer } from "react-toastify";
+import ActivateAccount from "./components/authentication/ActivateAccount";
 
 import axios from "axios";
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/register" component={SignUp} />
           <Route path="/login" component={LogIn} />
           <Route path="/logout" component={LogOut} />
+          <Route path="/activate/:uid/:token" component={ActivateAccount} />
         </Switch>
         <ToastContainer hideProgressBar={true} newestOnTop={true} />
         <Footer />

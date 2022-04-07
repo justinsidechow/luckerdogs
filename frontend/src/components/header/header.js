@@ -39,7 +39,17 @@ function Header(props) {
 
   //refreshes header whenever auth token is changed to animate the button switches
   useEffect(() => {
-    setState({ auth: localStorage.getItem("token") ? true : false });
+    let auth = token ? true : false;
+    if (auth) {
+      setTimeout(function () {
+        setState({
+          user: Object.values(JSON.parse(localStorage.getItem("user")))[0],
+          auth: auth,
+        });
+      }, 50);
+    } else {
+      setState({ auth: auth });
+    }
   }, [token]);
 
   const onLogOutClick = () => {
@@ -102,6 +112,16 @@ function Header(props) {
               onClick={onLogInClick}
             >
               Login
+            </Button>
+          )}
+          {state.auth && (
+            <Button
+              color="black"
+              variant="text"
+              className={classes.link}
+              //onClick={}
+            >
+              {state.user}
             </Button>
           )}
           {state.auth && (

@@ -56,6 +56,7 @@ function SignUp(props) {
 
   const handleSubmit = () => {
     const userData = {
+      email: state.email,
       username: state.username,
       password: state.password,
       confirm_password: state.confirm_password,
@@ -75,7 +76,6 @@ function SignUp(props) {
         </Typography>
         <FormControl className={classes.form} noValidate>
           <Grid container spacing={2}>
-            {/*
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -84,12 +84,11 @@ function SignUp(props) {
                 type="email"
                 id="email"
                 name="email"
-                label="Email Address"
+                label="email"
                 autoComplete="email"
                 onChange={handleChange}
               />
             </Grid>
-            */}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
