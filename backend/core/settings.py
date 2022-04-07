@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-76u=ien^ers=erv=9089k!fy&%-!(1!n=@g9dlvp*57d@n7%mn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0',
+                 'luckerdogs.com', 'www.luckerdogs.com']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -49,7 +50,6 @@ INSTALLED_APPS = [
     'djoser',
     'users',
     'coinToss',
-    'django_static',
 ]
 
 MIDDLEWARE = [
@@ -147,8 +147,19 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    "USER_ID_FIELD": "username"
+    "USER_ID_FIELD": "username",
+    "LOGIN_FIELD": "username",
+    "SEND_ACTIVATION_EMAIL": True,
+    "ACTIVATION_URL": "activate/{uid}/{token}",
+    "PASSWORD_RESET_CONFIRM_URL": "reset_password/{uid}/{token}",
+    'SERIALIZERS': {
+        'token_create': 'users.serializers.CustomTokenCreateSerializer',
+    },
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# django.core.mail.backends.locmem.EmailBackend for production
+SITE_NAME = "luckerdogs"
 
 MEDIA_URL = '/media/'
 STATIC_URL = '/django_static/'
