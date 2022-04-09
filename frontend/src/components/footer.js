@@ -47,7 +47,7 @@ const footers = [
   },
   {
     title: "Contact",
-    description: ["Contact Info", "Contact Info"],
+    description: ["Contact Info"],
   },
   {
     title: "Legal",
