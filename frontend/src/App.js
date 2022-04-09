@@ -9,6 +9,7 @@ import LogIn from "./components/login/login";
 import LogOut from "./components/authentication/logout";
 import { ToastContainer } from "react-toastify";
 import ActivateAccount from "./components/authentication/ActivateAccount";
+import ResendActivation from "./components/authentication/ResendActivation";
 
 import axios from "axios";
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/login" component={LogIn} />
           <Route path="/logout" component={LogOut} />
           <Route path="/activate/:uid/:token" component={ActivateAccount} />
+          <Route path="/resend_activation" component={ResendActivation} />
         </Switch>
         <ToastContainer hideProgressBar={true} newestOnTop={true} />
         <Footer />
