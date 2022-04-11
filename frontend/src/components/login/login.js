@@ -120,10 +120,6 @@ function LogIn(props) {
               />
             </Grid>
           </Grid>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             fullWidth
             variant="contained"
@@ -135,7 +131,7 @@ function LogIn(props) {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="/send_reset_password" variant="body2">
                 Forgot password?
               </Link>
             </Grid>

@@ -41,7 +41,7 @@ export const signupNewUser = (userData) => (dispatch) => {
       toast.success(
         "Account for " +
           userData.username +
-          " created successfully. Please login."
+          " created successfully. Please check your email to activate your account and then login."
       );
       dispatch({ type: CREATE_USER_SUCCESS });
       dispatch(push("/login"));

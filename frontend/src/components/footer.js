@@ -38,7 +38,6 @@ let footerGameList = [];
 for (let x of GameList) {
   footerGameList.push(x[0]);
 }
-console.log(footerGameList);
 
 const footers = [
   {
