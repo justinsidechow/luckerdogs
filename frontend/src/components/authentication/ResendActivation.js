@@ -36,13 +36,19 @@ import {
 } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
 
-function ResendActivation() {
+function ResendActivation(props) {
   const useStyles = makeStyles((theme) => ({
-    container: { padding: "2em", backgroundColor: "#36454F", color: "white" },
+    container: {
+      padding: "3em",
+      paddingBottom: "5em",
+      backgroundColor: "#36454F",
+      color: "white",
+    },
     forms: {
       paddingBottom: "1em",
     },
   }));
+  const classes = useStyles();
 
   const initialState = {
     email: "",
@@ -51,7 +57,6 @@ function ResendActivation() {
   };
   const [state, setState] = useState(initialState);
 
-  const classes = useStyles();
 
   const handleChange = (e) => {
     setState({
@@ -63,7 +68,7 @@ function ResendActivation() {
 
   //useEffect(() => {}, []);
 
-  const onResendClick = () => {
+  const onResendClick = (props) => {
     setState({ emailError: "" });
     setState({ status: "" });
 
@@ -87,7 +92,7 @@ function ResendActivation() {
 
   let errorAlert = (
     <Alert variant="danger">
-      <Alert.Heading>Problem during activation email send </Alert.Heading>
+      <Alert.Heading>Problem during activation email send. </Alert.Heading>
       Please try again or contact service support for further help.
     </Alert>
   );

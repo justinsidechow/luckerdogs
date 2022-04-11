@@ -35,8 +35,9 @@ import {
   FormControl,
 } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
+import PagePush from "./ActivateActions";
 
-function ResetPassword(props) {
+function ResetPasswordConfirm(props) {
   const useStyles = makeStyles((theme) => ({
     container: {
       padding: "3em",
@@ -51,11 +52,10 @@ function ResetPassword(props) {
   const classes = useStyles();
 
   const initialState = {
-    email: "",
-    emailError: "",
+    new_password: "",
+    passwordError: "",
     status: "",
   };
-
   const [state, setState] = useState(initialState);
 
   const handleChange = (e) => {
@@ -66,67 +66,73 @@ function ResetPassword(props) {
     });
   };
 
-  const onSendClick = () => {
-    setState({ emailError: "" });
+  const onSaveClick = () => {
+    setState({ passwordError: "" });
     setState({ status: "" });
 
-    const userData = {
-      email: state.email,
+    const { uid, token } = props.match.params;
+    const data = {
+      uid: uid,
+      token: token,
+      new_password: state.new_password,
     };
     axios
-      .post("/api/v1/users/reset_password/", userData)
+      .post("/api/v1/users/reset_password_confirm/", data)
       .then((response) => {
         setState({ status: "success" });
+        props.PagePush("/login");
+        console.log("confirmed");
       })
       .catch((error) => {
-        if (error.response && error.response.data.hasOwnProperty("email")) {
-          setState({ emailError: error.response.data["email"] });
+        if (
+          error.response &&
+          error.response.data.hasOwnProperty("new_password")
+        ) {
+          setState({ passwordError: error.response.data["new_password"] });
         } else {
           setState({ status: "error" });
         }
+        console.log("error");
       });
   };
 
-  let errorAlert = (
+  const errorAlert = (
     <Alert variant="danger">
-      <Alert.Heading>Problem during reset password email send</Alert.Heading>
-      Please try again or contact service support for further help.
+      <Alert.Heading>Problem during new password set </Alert.Heading>
+      <p>
+        Please try reset password again or contact service support for further
+        help.
+      </p>
     </Alert>
   );
 
-  let successAlert = (
+  const successAlert = (
     <Alert variant="success">
-      <Alert.Heading>Email sent </Alert.Heading>
-      <p>
-        We send you an email with reset password link. Please check your email.
-      </p>
-      <p>
-        Please try again or contact us if you do not receive it within a few
-        minutes.
-      </p>
+      <Alert.Heading>New Password Set</Alert.Heading>
+      <p>You can Login to your account with new password.</p>
     </Alert>
   );
 
-  let form = (
+  const form = (
     <div>
       <Form className={classes.forms}>
         <Form.Group controlId="emailId">
-          <Form.Label>Your Email: </Form.Label>
+          <Form.Label>Your New Password: </Form.Label>
           <Form.Control
-            isInvalid={state.emailError}
-            type="text"
-            name="email"
-            placeholder="Enter email"
-            value={state.email}
+            isInvalid={state.passwordError}
+            type="password"
+            name="new_password"
+            placeholder="Enter new password"
+            value={state.new_password}
             onChange={handleChange}
           />
           <FormControl.Feedback type="invalid">
-            {state.emailError}
+            {state.passwordError}
           </FormControl.Feedback>
         </Form.Group>
       </Form>
-      <Button color="primary" onClick={onSendClick}>
-        Send email with reset link
+      <Button color="primary" onClick={onSaveClick}>
+        Save
       </Button>
     </div>
   );
@@ -142,7 +148,7 @@ function ResetPassword(props) {
     <Container className={classes.container}>
       <Row>
         <Col md="6">
-          <h1>Reset Password</h1>
+          <h1>Set a New Password</h1>
           {alert}
           {state.status !== "success" && form}
         </Col>
@@ -151,8 +157,8 @@ function ResetPassword(props) {
   );
 }
 
-ResetPassword.propTypes = {};
+ResetPasswordConfirm.propTypes = {};
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps)(ResetPassword);
+export default connect(mapStateToProps)(ResetPasswordConfirm);
