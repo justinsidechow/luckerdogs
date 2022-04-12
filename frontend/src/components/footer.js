@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import { GameList } from "./utils/GameList";
+import { PagePush } from "./utils/PagePush";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -34,27 +35,32 @@ function Copyright() {
 }
 
 let footerGameList = [];
+let footerGameListLink = [];
 
 for (let x of GameList) {
   footerGameList.push(x[0]);
+  footerGameListLink.push(x[3]);
 }
 
 const footers = [
   {
     title: "Game List",
     description: footerGameList,
+    link: footerGameListLink,
   },
   {
     title: "Contact",
-    description: ["Contact Info"],
+    description: ["Contact", "Source Code"],
+    link: ["/contact", "https://github.com/justinsidechow/luckerdogs"],
   },
   {
     title: "Legal",
-    description: ["Privacy policy", "Terms of use"],
+    description: ["Privacy policy", "Terms of Use"],
+    link: ["/privacy_policy", "/terms_of_use"],
   },
 ];
 
-function Footer() {
+function Footer(props) {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -68,7 +74,11 @@ function Footer() {
               <ul>
                 {footer.description.map((item) => (
                   <li key={item}>
-                    <Link href="#" variant="subtitle1" color="textSecondary">
+                    <Link
+                      href={footer.link[footer.description.indexOf(item)]}
+                      variant="subtitle1"
+                      color="textSecondary"
+                    >
                       {item}
                     </Link>
                   </li>
