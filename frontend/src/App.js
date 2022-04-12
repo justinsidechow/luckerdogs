@@ -12,6 +12,7 @@ import ActivateAccount from "./components/authentication/ActivateAccount";
 import ResendActivation from "./components/authentication/ResendActivation";
 import ResetPassword from "./components/authentication/ResetPassword";
 import ResetPasswordConfirm from "./components/authentication/ResetPasswordConfirm";
+import CoinToss from "./components/games/coin_toss/CoinTossPage";
 
 import axios from "axios";
 
@@ -38,6 +39,7 @@ function App() {
             path="/reset_password/:uid/:token"
             component={ResetPasswordConfirm}
           />
+          <Route path="/coin_toss" component={CoinToss} />
         </Switch>
         <ToastContainer hideProgressBar={true} newestOnTop={true} />
         <Footer />
