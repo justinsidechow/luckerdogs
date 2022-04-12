@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../login/LoginActions";
-import { titleButton, registerButton, loginButton } from "./headerActions";
+import { PagePush } from "../utils/PagePush";
 
 function Header(props) {
   const useStyles = makeStyles((theme) => ({
@@ -56,18 +56,6 @@ function Header(props) {
     props.logout();
   };
 
-  const onLogInClick = () => {
-    props.loginButton();
-  };
-
-  const onRegisterClick = () => {
-    props.registerButton();
-  };
-
-  const onTitleClick = () => {
-    props.titleButton();
-  };
-
   return (
     <React.Fragment>
       <CssBaseline />
@@ -89,7 +77,7 @@ function Header(props) {
               underline="none"
               color="textPrimary"
               className={classes.title}
-              onClick={onTitleClick}
+              onClick={() => props.PagePush("/")}
             >
               Luckerdogs
             </Button>
@@ -99,7 +87,7 @@ function Header(props) {
               color="primary"
               variant="outlined"
               className={classes.link}
-              onClick={onRegisterClick}
+              onClick={() => props.PagePush("/register")}
             >
               Register
             </Button>
@@ -109,7 +97,7 @@ function Header(props) {
               color="primary"
               variant="outlined"
               className={classes.link}
-              onClick={onLogInClick}
+              onClick={() => props.PagePush("/login")}
             >
               Login
             </Button>
@@ -149,8 +137,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  titleButton,
-  registerButton,
-  loginButton,
   logout,
+  PagePush,
 })(Header);
