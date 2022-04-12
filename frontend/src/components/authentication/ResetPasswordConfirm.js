@@ -22,30 +22,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  Alert,
-  Container,
-  Button,
-  Row,
-  Col,
-  Form,
-  FormControl,
-} from "react-bootstrap";
+import { Alert } from "react-bootstrap";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { FormControl } from "@material-ui/core";
+import { connect } from "react-redux";
 import PagePush from "./ActivateActions";
 
 function ResetPasswordConfirm(props) {
   const useStyles = makeStyles((theme) => ({
-    container: {
-      padding: "3em",
-      paddingBottom: "5em",
-      backgroundColor: "#36454F",
-      color: "white",
+    paper: {
+      marginTop: theme.spacing(8),
+      marginBottom: theme.spacing(8),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
     },
-    forms: {
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+    text: {
+      textAlign: "center",
+      width: "100%",
       paddingBottom: "1em",
     },
   }));
@@ -88,71 +102,88 @@ function ResetPasswordConfirm(props) {
           error.response &&
           error.response.data.hasOwnProperty("new_password")
         ) {
-          setState({ passwordError: error.response.data["new_password"] });
+          setState({
+            passwordError: error.response.data["new_password"],
+            status: "error",
+          });
         } else {
           setState({ status: "error" });
         }
-        console.log("error");
+        console.log("state.status: " + state.status);
       });
   };
 
   const errorAlert = (
-    <Alert variant="danger">
-      <Alert.Heading>Problem during new password set </Alert.Heading>
-      <p>
-        Please try reset password again or contact service support for further
-        help.
-      </p>
+    <Alert variant="danger" className={classes.text}>
+      <Alert.Heading>
+        Problem occured with setting the new password.
+      </Alert.Heading>
+      Please try reset password again or contact service support for further
+      help.
     </Alert>
   );
 
   const successAlert = (
-    <Alert variant="success">
+    <Alert variant="success" className={classes.text}>
       <Alert.Heading>New Password Set</Alert.Heading>
-      <p>You can Login to your account with new password.</p>
+      You can Login to your account with new password.
     </Alert>
   );
 
-  const form = (
-    <div>
-      <Form className={classes.forms}>
-        <Form.Group controlId="emailId">
-          <Form.Label>Your New Password: </Form.Label>
-          <Form.Control
-            isInvalid={state.passwordError}
-            type="password"
-            name="new_password"
-            placeholder="Enter new password"
-            value={state.new_password}
-            onChange={handleChange}
-          />
-          <FormControl.Feedback type="invalid">
-            {state.passwordError}
-          </FormControl.Feedback>
-        </Form.Group>
-      </Form>
-      <Button color="primary" onClick={onSaveClick}>
-        Save
-      </Button>
-    </div>
+  let alert = (
+    <Alert variant="success" className={classes.text}>
+      <Alert.Heading>Please enter your new password.</Alert.Heading>
+    </Alert>
   );
-
-  let alert = "";
   if (state.status === "error") {
     alert = errorAlert;
   } else if (state.status === "success") {
     alert = successAlert;
   }
 
+  useEffect(() => {}, [state.status]);
+
   return (
-    <Container className={classes.container}>
-      <Row>
-        <Col md="6">
-          <h1>Set a New Password</h1>
-          {alert}
-          {state.status !== "success" && form}
-        </Col>
-      </Row>
+    <Container className={classes.container} component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}></Avatar>
+        <Typography component="h1" variant="h5">
+          New Password
+        </Typography>
+        <FormControl className={classes.form}>
+          <Grid container spacing={2}>
+            {alert}
+            <Grid item xs={12}>
+              <TextField
+                isInvalid={state.passwordError}
+                variant="outlined"
+                required
+                fullWidth
+                type="password"
+                id="password"
+                name="password"
+                label="password"
+                autoComplete="password"
+                onChange={handleChange}
+              />
+            </Grid>
+          </Grid>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={onSaveClick}
+          >
+            Submit New Password
+          </Button>
+          <Grid container>
+            <Grid item xs></Grid>
+            <Grid item></Grid>
+          </Grid>
+        </FormControl>
+      </div>
     </Container>
   );
 }
