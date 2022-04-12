@@ -1,5 +1,5 @@
 export const GameList = [
-  ["Coin Toss", "Feeling lucky punk?", "/spinning_coin.mp4", "/coin-toss"],
+  ["Coin Toss", "Feeling lucky punk?", "/spinning_coin.mp4", "/coin_toss"],
   ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
 ];
 
