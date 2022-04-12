@@ -13,6 +13,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../login/LoginActions";
 import { GameList } from "../utils/GameList";
+import { PagePush } from "../utils/PagePush";
+import CoinToss from "../games/coin_toss/CoinTossPage";
 
 function HomePage(props) {
   const useStyles = makeStyles((theme) => ({
@@ -52,12 +54,10 @@ function HomePage(props) {
       marginBottom: theme.spacing(2),
     },
   }));
-
   const classes = useStyles();
+  const homeGrids = GameList;
 
   useEffect(() => {}, []);
-
-  const homeGrids = GameList;
 
   return (
     <React.Fragment>
@@ -80,9 +80,10 @@ function HomePage(props) {
                         <CardMedia
                           component="video"
                           image={process.env.PUBLIC_URL + homeGrids[2]}
-                          title="Coin Spining"
+                          title="video"
                           autoPlay
                           loop
+                          onClick={() => props.PagePush(homeGrids[3])}
                         />
                         <CardContent>
                           <Typography
@@ -127,4 +128,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   login,
+  PagePush,
 })(HomePage);
