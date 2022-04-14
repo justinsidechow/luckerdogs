@@ -51,12 +51,15 @@ const footers = [
   {
     title: "Contact",
     description: ["Contact", "Source Code"],
-    link: ["/contact", "https://github.com/justinsidechow/luckerdogs"],
+    link: [
+      "mailto:justinsidechow@gmail.com",
+      "https://github.com/justinsidechow/luckerdogs",
+    ],
   },
   {
     title: "Legal",
-    description: ["Privacy policy", "Terms of Use"],
-    link: ["/privacy_policy", "/terms_of_use"],
+    description: ["Privacy Policy", "Terms and Conditions"],
+    link: ["/privacy_policy", "/terms_and_conditions"],
   },
 ];
 

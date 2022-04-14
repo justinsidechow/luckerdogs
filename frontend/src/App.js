@@ -13,6 +13,8 @@ import ResendActivation from "./components/authentication/ResendActivation";
 import ResetPassword from "./components/authentication/ResetPassword";
 import ResetPasswordConfirm from "./components/authentication/ResetPasswordConfirm";
 import CoinToss from "./components/games/coin_toss/CoinTossPage";
+import PrivacyPolicy from "./components/legals/PrivacyPolicy";
+import TermsAndConditions from "./components/legals/TermsAndConditions";
 
 import axios from "axios";
 
@@ -40,6 +42,8 @@ function App() {
             component={ResetPasswordConfirm}
           />
           <Route path="/coin_toss" component={CoinToss} />
+          <Route path="/privacy_policy" component={PrivacyPolicy} />
+          <Route path="/terms_and_conditions" component={TermsAndConditions} />
         </Switch>
         <ToastContainer hideProgressBar={true} newestOnTop={true} />
         <Footer />
