@@ -1,0 +1,4 @@
+export const GET_COINTOSS = "GET_COINTOSS";
+export const ADD_COINTOSS = "ADD_COINTOSS";
+export const UPDATE_COINTOSS = "UPDATE_COINTOSS";
+export const DELETE_COINTOSS = "DELETE_COINTOSS";

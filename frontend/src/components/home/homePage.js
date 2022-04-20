@@ -60,60 +60,53 @@ function HomePage(props) {
   useEffect(() => {}, []);
 
   return (
-    <React.Fragment>
-      <div className={classes.backgroundColor}>
-        <h1 className={classes.title}>How lucky are you?</h1>
-        <Container maxWidth="md" component="main" className={classes.container}>
-          <Grid
-            container
-            spacing={5}
-            alignItems="flex"
-            className={classes.grid}
-          >
-            {homeGrids.map((homeGrids) => {
-              return (
-                // Enterprise card is full width at sm breakpoint
-                <Grid item key={homeGrids} xs={10} md={4}>
-                  <div className="card-animation">
-                    <Card>
-                      <CardActionArea>
-                        <CardMedia
-                          component="video"
-                          image={process.env.PUBLIC_URL + homeGrids[2]}
-                          title="video"
-                          autoPlay
-                          loop
-                          onClick={() => props.PagePush(homeGrids[3])}
-                        />
-                        <CardContent>
+    <div className={classes.backgroundColor}>
+      <h1 className={classes.title}>How lucky are you?</h1>
+      <Container maxWidth="md" component="main" className={classes.container}>
+        <Grid container spacing={5} alignItems="flex" className={classes.grid}>
+          {homeGrids.map((homeGrids) => {
+            return (
+              // Enterprise card is full width at sm breakpoint
+              <Grid item key={homeGrids} xs={10} md={4}>
+                <div className="card-animation">
+                  <Card>
+                    <CardActionArea>
+                      <CardMedia
+                        component="video"
+                        image={process.env.PUBLIC_URL + homeGrids[2]}
+                        title="video"
+                        autoPlay
+                        loop
+                        onClick={() => props.PagePush(homeGrids[3])}
+                      />
+                      <CardContent>
+                        <Typography
+                          gutterBottom
+                          variant="h6"
+                          component="h2"
+                          className={classes.postTitle}
+                        >
+                          {homeGrids[0].substr(0, 50)}
+                        </Typography>
+                        <div className={classes.postText}>
                           <Typography
-                            gutterBottom
-                            variant="h6"
-                            component="h2"
-                            className={classes.postTitle}
-                          >
-                            {homeGrids[0].substr(0, 50)}
+                            component="p"
+                            color="textPrimary"
+                          ></Typography>
+                          <Typography variant="p" color="textSecondary">
+                            {homeGrids[1].substr(0, 60)}
                           </Typography>
-                          <div className={classes.postText}>
-                            <Typography
-                              component="p"
-                              color="textPrimary"
-                            ></Typography>
-                            <Typography variant="p" color="textSecondary">
-                              {homeGrids[1].substr(0, 60)}
-                            </Typography>
-                          </div>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  </div>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Container>
-      </div>
-    </React.Fragment>
+                        </div>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </div>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Container>
+    </div>
   );
 }
 

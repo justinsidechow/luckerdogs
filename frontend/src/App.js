@@ -13,8 +13,8 @@ import ResendActivation from "./components/authentication/ResendActivation";
 import ResetPassword from "./components/authentication/ResetPassword";
 import ResetPasswordConfirm from "./components/authentication/ResetPasswordConfirm";
 import CoinToss from "./components/games/coin_toss/CoinTossPage";
-import PrivacyPolicy from "./components/legals/PrivacyPolicy";
-import TermsAndConditions from "./components/legals/TermsAndConditions";
+import PrivacyPolicy from "./components/legal/PrivacyPolicy";
+import TermsAndConditions from "./components/legal/TermsAndConditions";
 
 import axios from "axios";
 
