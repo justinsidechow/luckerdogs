@@ -10,13 +10,18 @@ class coinTossSerializer(serializers.ModelSerializer):
             "id",
             "created_at",
             "created_by",
+            "trueHeads",
+            "trueTails",
+            "falseHeads",
+            "falseTails",
         )
         fields = (
             "id",
             "created_at",
             "created_by",
-            "heads",
-            "tails",
+            "coinTossChoice",
             "trueHeads",
             "trueTails",
+            "falseHeads",
+            "falseTails",
         )

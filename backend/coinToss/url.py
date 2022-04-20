@@ -3,5 +3,5 @@ from rest_framework.routers import DefaultRouter
 from coinToss.views import coinTossViewSet
 
 router = DefaultRouter()
-router.register("cointoss", coinTossViewSet, basename="notes")
+router.register("cointoss", coinTossViewSet, basename="cointoss")
 coinToss_urlpatterns = [path("api/v1/", include(router.urls))]
