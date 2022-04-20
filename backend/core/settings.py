@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'djoser',
     'users',
-    'coinToss',
+    'money',
+    'coinToss.apps.CoinTossConfig',
 ]
 
 MIDDLEWARE = [
