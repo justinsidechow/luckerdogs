@@ -7,8 +7,8 @@ import {
   DELETE_COINTOSS,
 } from "./CoinTossTypes";
 
-export const getCoinToss = () => (dispatch) => {
-  axios
+export const getCoinToss = () => async (dispatch) => {
+  await axios
     .get("/api/v1/cointoss/")
     .then((response) => {
       dispatch({

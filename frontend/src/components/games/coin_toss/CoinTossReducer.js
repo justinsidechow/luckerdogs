@@ -6,7 +6,7 @@ import {
 } from "./CoinTossTypes";
 
 const initialState = {
-  CoinToss: [],
+  coinToss: [],
 };
 
 export const CoinTosssReducer = (state = initialState, action) => {
@@ -14,22 +14,22 @@ export const CoinTosssReducer = (state = initialState, action) => {
     case GET_COINTOSS:
       return {
         ...state,
-        CoinToss: action.payload,
+        coinToss: action.payload,
       };
     case ADD_COINTOSS:
       return {
         ...state,
-        CoinToss: [...state.CoinToss, action.payload],
+        coinToss: [...state.coinToss, action.payload],
       };
     case DELETE_COINTOSS:
       return {
         ...state,
-        CoinToss: state.CoinToss.filter(
+        coinToss: state.coinToss.filter(
           (item, index) => item.id !== action.payload
         ),
       };
     case UPDATE_COINTOSS:
-      const updatedCoinToss = state.CoinToss.map((item) => {
+      const updatedCoinToss = state.coinToss.map((item) => {
         if (item.id === action.payload.id) {
           return { ...item, ...action.payload };
         }
@@ -37,7 +37,7 @@ export const CoinTosssReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        CoinToss: updatedCoinToss,
+        coinToss: updatedCoinToss,
       };
     default:
       return state;
