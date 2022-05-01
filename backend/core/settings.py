@@ -155,6 +155,8 @@ DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "reset_password/{uid}/{token}",
     'SERIALIZERS': {
         'token_create': 'users.serializers.CustomTokenCreateSerializer',
+        'user': 'djoser.serializers.UserSerializer',
+        'current_user': 'users.serializers.CurrentUserSerializer',
     },
 }
 

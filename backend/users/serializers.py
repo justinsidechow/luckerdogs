@@ -22,7 +22,7 @@
 
 from django.contrib.auth import authenticate, get_user_model
 from djoser.conf import settings
-from djoser.serializers import TokenCreateSerializer
+from djoser.serializers import TokenCreateSerializer, UserSerializer
 
 User = get_user_model()
 
@@ -43,3 +43,14 @@ class CustomTokenCreateSerializer(TokenCreateSerializer):
         if self.user:  # and self.user.is_active:
             return attrs
         self.fail("invalid_credentials")
+
+
+class CurrentUserSerializer(UserSerializer):
+
+    class Meta(UserSerializer.Meta):
+        model = User
+        fields = (
+            'id',
+            'email',
+            'username',
+        )

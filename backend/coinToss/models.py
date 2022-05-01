@@ -9,7 +9,7 @@ User = get_user_model()
 
 class coinToss(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.OneToOneField(User, on_delete=models.CASCADE)
 
     # heads/tails stands for the coin position the user choosed
     coinTossChoice = models.CharField(default="", max_length=10)

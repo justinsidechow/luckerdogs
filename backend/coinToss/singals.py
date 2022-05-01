@@ -2,7 +2,6 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from coinToss.models import coinToss
 from coinToss.calculations import randomized_coin_flip
-from django.db.models import F
 
 
 # updates the answer of the randomized coin toss answer into the database model
