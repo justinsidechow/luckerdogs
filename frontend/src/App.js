@@ -12,7 +12,7 @@ import ActivateAccount from "./components/authentication/ActivateAccount";
 import ResendActivation from "./components/authentication/ResendActivation";
 import ResetPassword from "./components/authentication/ResetPassword";
 import ResetPasswordConfirm from "./components/authentication/ResetPasswordConfirm";
-import CoinToss from "./components/games/coin_toss/CoinTossPage";
+import CoinToss from "./components/games/coin_toss/CoinToss";
 import PrivacyPolicy from "./components/legal/PrivacyPolicy";
 import TermsAndConditions from "./components/legal/TermsAndConditions";
 

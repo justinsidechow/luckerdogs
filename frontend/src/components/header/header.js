@@ -41,9 +41,9 @@ function Header(props) {
   useEffect(() => {
     let auth = token ? true : false;
     if (auth) {
-      setTimeout(function () {
+      setTimeout(() => {
         setState({
-          user: Object.values(JSON.parse(localStorage.getItem("user")))[0],
+          user: Object.values(JSON.parse(localStorage.getItem("user")))[1],
           auth: auth,
         });
       }, 50);
@@ -103,14 +103,14 @@ function Header(props) {
             </Button>
           )}
           {state.auth && (
-            <Button
+            <h3
               color="black"
               variant="text"
               className={classes.link}
               //onClick={}
             >
               {state.user}
-            </Button>
+            </h3>
           )}
           {state.auth && (
             <Button

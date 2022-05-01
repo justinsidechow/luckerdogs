@@ -26,12 +26,14 @@ import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 import { signupReducer } from "./components/signup/SignupReducer";
 import { loginReducer } from "./components/login/LoginReducer";
+import { CoinTosssReducer } from "./components/games/coin_toss/CoinTossReducer";
 
 const createRootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
     createUser: signupReducer,
     auth: loginReducer,
+    coinToss: CoinTosssReducer,
   });
 
 export default createRootReducer;

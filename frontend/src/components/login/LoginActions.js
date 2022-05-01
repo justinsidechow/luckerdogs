@@ -48,6 +48,7 @@ export const getCurrentUser = (redirectTo) => (dispatch) => {
     .get("/api/v1/users/me/")
     .then((response) => {
       const user = {
+        id: response.data.id,
         username: response.data.username,
         email: response.data.email,
       };

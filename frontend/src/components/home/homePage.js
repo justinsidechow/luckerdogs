@@ -14,7 +14,6 @@ import PropTypes from "prop-types";
 import { login } from "../login/LoginActions";
 import { GameList } from "../utils/GameList";
 import { PagePush } from "../utils/PagePush";
-import CoinToss from "../games/coin_toss/CoinTossPage";
 
 function HomePage(props) {
   const useStyles = makeStyles((theme) => ({
@@ -75,8 +74,8 @@ function HomePage(props) {
                         component="video"
                         image={process.env.PUBLIC_URL + homeGrids[2]}
                         title="video"
-                        autoPlay
-                        loop
+                        autoPlay="true"
+                        loop="true"
                         onClick={() => props.PagePush(homeGrids[3])}
                       />
                       <CardContent>
