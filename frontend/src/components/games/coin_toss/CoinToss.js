@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import { getCoinToss, updateCoinToss } from "./CoinTossAction";
+import { getCoinToss, addCoinToss, updateCoinToss } from "./CoinTossAction";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { coinTossHeadVideos, coinTossTailVideos } from "../../utils/GameList";
@@ -121,6 +121,11 @@ function CoinToss(props) {
       //props.getCoinToss();
       setState({ video: true });
       videoResult();
+    } else if (
+      props.auth["isAuthenticated"] &&
+      props.coinToss["coinToss"][0] === undefined
+    ) {
+      props.addCoinToss(coinTossResult);
     }
   };
 
@@ -195,6 +200,25 @@ function CoinToss(props) {
 
   const sourceCode = () => {
     if (props.coinToss["coinToss"][0]) {
+      return (
+        <h3 className={classes.sourceCodeText}>
+          Click{" "}
+          <Link href="https://github.com/justinsidechow/luckerdogs/blob/master/backend/coinToss/calculations.py">
+            Here
+          </Link>{" "}
+          to view the source code and explaination on why a coin toss is always
+          50/50
+        </h3>
+      );
+    } else if (
+      props.auth["isAuthenticated"] &&
+      props.coinToss["coinToss"][0] === undefined
+    ) {
+      return (
+        <h3 className={classes.sourceCodeText}>
+          Play a couple of rounds to see your guess results.
+        </h3>
+      );
     } else {
       return (
         <h3 className={classes.sourceCodeText}>
@@ -203,16 +227,6 @@ function CoinToss(props) {
         </h3>
       );
     }
-    return (
-      <h3 className={classes.sourceCodeText}>
-        Click{" "}
-        <Link href="https://github.com/justinsidechow/luckerdogs/blob/master/backend/coinToss/calculations.py">
-          Here
-        </Link>{" "}
-        to view the source code and explaination on why a coin toss is always
-        50/50
-      </h3>
-    );
   };
 
   return (
@@ -302,8 +316,11 @@ CoinToss.propTypes = {
 };
 const mapStateToProps = (state) => ({
   coinToss: state.coinToss,
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getCoinToss, updateCoinToss })(
-  CoinToss
-);
+export default connect(mapStateToProps, {
+  getCoinToss,
+  addCoinToss,
+  updateCoinToss,
+})(CoinToss);
