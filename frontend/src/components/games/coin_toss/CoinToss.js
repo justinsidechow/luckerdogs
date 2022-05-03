@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+import { CardActionArea } from "@mui/material";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 import { getCoinToss, updateCoinToss } from "./CoinTossAction";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { coinTossHeadVideos, coinTossTailVideos } from "../../utils/GameList";
 
 function CoinToss(props) {
   const useStyles = makeStyles((theme) => ({
@@ -64,6 +67,11 @@ function CoinToss(props) {
       textAlign: "center",
       color: "white",
     },
+    sourceCodeText: {
+      margin: "auto",
+      textAlign: "center !important",
+      color: "white",
+    },
     green: {
       color: "#00FF00",
     },
@@ -73,9 +81,48 @@ function CoinToss(props) {
   }));
   const classes = useStyles();
 
+  const initialState = {
+    video: false,
+    videoResult: "",
+  };
+
+  const [state, setState] = useState(initialState);
+
   useEffect(() => {
     props.getCoinToss();
-  }, []);
+    setState({ video: false, videoResult: state.videoResult });
+  }, [state.video]);
+
+  // state.videoResult = true, will show the video as heads
+  // state.videoResult = false, will show the video as tails
+  const videoResult = () => {
+    if (props.coinToss["coinToss"][0]) {
+      if (
+        props.coinToss["coinToss"][0]["coinTossChoice"] === "trueHeads" ||
+        props.coinToss["coinToss"][0]["coinTossChoice"] === "falseTails"
+      ) {
+        setState({ video: state.video, videoResult: true });
+      } else if (
+        props.coinToss["coinToss"][0]["coinTossChoice"] === "trueTails" ||
+        props.coinToss["coinToss"][0]["coinTossChoice"] === "falseHeads"
+      ) {
+        setState({ video: state.video, videoResult: false });
+      }
+    }
+  };
+
+  // sends the PUT API request to the server and refreshed the page using state.video
+  const buttonResults = (result) => {
+    const coinTossResult = {
+      coinTossChoice: result,
+    };
+    if (props.coinToss["coinToss"][0]) {
+      props.updateCoinToss(props.coinToss["coinToss"][0]["id"], coinTossResult);
+      //props.getCoinToss();
+      setState({ video: true });
+      videoResult();
+    }
+  };
 
   // display heads results with color scheme
   const headsResults = (result) => {
@@ -129,7 +176,7 @@ function CoinToss(props) {
       headsFactor = headsFactor.toFixed(5);
       return (
         <h3 className={classes.text}>
-          {headsFactor}% <span className={classes.green}>correct</span>
+          {headsFactor}% <span className={classes.green}>correct guesses</span>
         </h3>
       );
     } else if (props.coinToss["coinToss"][0] && coinSide === "tails") {
@@ -140,10 +187,32 @@ function CoinToss(props) {
       tailsFactor = tailsFactor.toFixed(5);
       return (
         <h3 className={classes.text}>
-          {tailsFactor}% <span className={classes.green}>correct</span>
+          {tailsFactor}% <span className={classes.green}>correct guesses</span>
         </h3>
       );
     }
+  };
+
+  const sourceCode = () => {
+    if (props.coinToss["coinToss"][0]) {
+    } else {
+      return (
+        <h3 className={classes.sourceCodeText}>
+          You would need to login to enable the game to work and register your
+          result.
+        </h3>
+      );
+    }
+    return (
+      <h3 className={classes.sourceCodeText}>
+        Click{" "}
+        <Link href="https://github.com/justinsidechow/luckerdogs/blob/master/backend/coinToss/calculations.py">
+          Here
+        </Link>{" "}
+        to view the source code and explaination on why a coin toss is always
+        50/50
+      </h3>
+    );
   };
 
   return (
@@ -152,17 +221,54 @@ function CoinToss(props) {
       <Container maxWidth="md" component="main" className={classes.container}>
         <Grid container spacing={2}>
           <Grid item xs={6} md={6}>
-            {" "}
+            {state.videoResult && (
+              <Card>
+                <CardActionArea>
+                  <CardMedia
+                    component="video"
+                    src={
+                      process.env.PUBLIC_URL +
+                      coinTossHeadVideos[Math.floor(Math.random() * 4)]
+                    }
+                    title="video"
+                    autoPlay={true}
+                  />
+                </CardActionArea>
+              </Card>
+            )}
+            {!state.videoResult && (
+              <Card>
+                <CardActionArea>
+                  <CardMedia
+                    component="video"
+                    src={
+                      process.env.PUBLIC_URL +
+                      coinTossTailVideos[Math.floor(Math.random() * 4)]
+                    }
+                    title="video"
+                    autoPlay={true}
+                  />
+                </CardActionArea>
+              </Card>
+            )}
           </Grid>
           <Grid item xs={6}>
             <h2 className={classes.buttonTitle}>
               Which side will the coin land on?
             </h2>
             <div className={classes.buttonGroup}>
-              <Button className={classes.buttons} variant="contained">
+              <Button
+                className={classes.buttons}
+                variant="contained"
+                onClick={() => buttonResults("heads")}
+              >
                 Heads
               </Button>
-              <Button className={classes.buttons} variant="contained">
+              <Button
+                className={classes.buttons}
+                variant="contained"
+                onClick={() => buttonResults("tails")}
+              >
                 Tails
               </Button>
             </div>
@@ -183,6 +289,7 @@ function CoinToss(props) {
             {correctFactor("tails")}
             <div className={classes.buttonGroup}></div>
           </Grid>
+          {sourceCode()}
         </Grid>
       </Container>
     </div>

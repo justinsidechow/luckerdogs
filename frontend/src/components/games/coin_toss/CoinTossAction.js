@@ -51,7 +51,7 @@ export const deleteCoinToss = (id) => (dispatch) => {
 
 export const updateCoinToss = (id, coinToss) => (dispatch) => {
   axios
-    .patch(`/api/v1/cointoss/${id}/`, coinToss)
+    .put(`/api/v1/cointoss/${id}/`, coinToss)
     .then((response) => {
       dispatch({
         type: UPDATE_COINTOSS,

@@ -3,6 +3,20 @@ export const GameList = [
   ["Lottery", "This is how you lose money!", "/lottery.mp4", "/lottery"],
 ];
 
+export const coinTossHeadVideos = [
+  "heads_1.mov",
+  "heads_2.mov",
+  "heads_3.mov",
+  "heads_4.mov",
+];
+
+export const coinTossTailVideos = [
+  "tails_1.mov",
+  "tails_2.mov",
+  "tails_3.mov",
+  "tails_4.mov",
+];
+
 // Returns all the odds-game within a Grid-Card display.
 // home_grids[0] = title
 // home_grids[1] = description
