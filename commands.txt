@@ -11,3 +11,38 @@ You can also use Ctrl+C to stop containers if not running in the background.
 
 Build and run containers
 docker-compose -f docker-compose-dev.yml up --build
+
+# for user interface
+npm install react-bootstrap bootstrap
+# for routing
+npm install react-router-dom
+
+npm install @mui/material @emotion/react @emotion/styled
+npm install @material-ui/core
+
+wsgi-entrypoint.sh commands
+
+#.DEBUG=True python manage.py runserver 0.0.0.0:8000
+
+#####################################################################################
+# original:
+# gunicorn server.wsgi --bind 0.0.0.0:8000 --workers 4 --threads 4
+
+# Options to DEBUG Django server
+# Optional commands to replace abouve gunicorn command
+
+# Option 1:
+# run gunicorn with debug log level
+# gunicorn server.wsgi --bind 0.0.0.0:8000 --workers 1 --threads 1 --log-level debug
+
+# Option 2:
+# run development server
+# DEBUG=True ./manage.py runserver 0.0.0.0:8000
+
+# gunicorn core.wsgi --bind 0.0.0.0:8000 --workers 1 --threads 1 --log-level debug
+# DEBUG=True python manage.py runserver 0.0.0.0:8000
+
+sudo docker-compose build
+sudo ./init-letsencrypt.sh
+sudo docker-compose down
+sudo docker-compose up --detach
