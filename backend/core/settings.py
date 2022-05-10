@@ -25,16 +25,14 @@ environ.Env.read_env()
 
 SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = env('DEBUG')
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0',
                  'luckerdogs.com', 'www.luckerdogs.com']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://luckerdogs.com",
-    "https://luckerdogs.com",
+    "http://127.0.0.1:3000"
 ]
 
 
@@ -99,7 +97,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -163,6 +160,20 @@ DJOSER = {
     },
 }
 
+# requires SSL certifications with letsencrypt to work
+SECURE_HSTS_SECONDS = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_TRUSTED_ORIGINS = [
+    'https://127.0.0.1''https://luckerdogs.com', 'https://www.luckerdogs.com']
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = 587
@@ -181,7 +192,7 @@ RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' for google cloud smtp
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' for test
 # EMAIL_BACKEND = django.core.mail.backends.locmem.EmailBackend for production from guide
-SITE_NAME = "Luckerdogs"
+SITE_NAME = "luckerdogs"
 
 MEDIA_URL = '/media/'
 STATIC_URL = '/django_static/'
