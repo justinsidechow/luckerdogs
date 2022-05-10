@@ -46,7 +46,7 @@ function Header(props) {
           user: Object.values(JSON.parse(localStorage.getItem("user")))[1],
           auth: auth,
         });
-      }, 50);
+      }, 100);
     } else {
       setState({ auth: auth });
     }
