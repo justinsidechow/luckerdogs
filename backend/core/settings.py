@@ -20,11 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY will be different in production website :)
-SECRET_KEY = 'django-insecure-76u=ien^ers=erv=9089k!fy&%-!(1!n=@g9dlvp*57d@n7%mn'
+p = Path(__file__).with_name("secret_key.txt")
+with p.open("r") as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0',
                  'luckerdogs.com', 'www.luckerdogs.com']
@@ -32,6 +33,8 @@ ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0',
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://luckerdogs.com",
+    "https://luckerdogs.com",
 ]
 
 
