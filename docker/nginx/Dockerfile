@@ -29,7 +29,8 @@ COPY ./frontend/package.json ./
 COPY ./frontend/package-lock.json ./
 RUN npm ci --silent
 COPY ./frontend/ ./
-RUN npm run build
+RUN RUN NODE_OPTIONS=--max_old_space_size=1000; npm run build
+
 
 # The second stage
 # Copy React static files and start nginx
