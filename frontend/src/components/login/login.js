@@ -65,7 +65,6 @@ function LogIn(props) {
       password: state.password,
     };
     props.login(userData, "/");
-    console.log("pushed");
   };
 
   const classes = useStyles();
