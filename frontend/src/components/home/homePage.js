@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -72,10 +71,11 @@ function HomePage(props) {
                     <CardActionArea>
                       <CardMedia
                         component="video"
-                        image={process.env.PUBLIC_URL + homeGrids[2]}
+                        src={process.env.PUBLIC_URL + homeGrids[2]}
                         title="video"
-                        autoPlay="true"
-                        loop="true"
+                        autoPlay
+                        loop
+                        muted
                         onClick={() => props.PagePush(homeGrids[3])}
                       />
                       <CardContent>
