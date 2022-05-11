@@ -40,14 +40,26 @@ services:
         build:
             context: .
             dockerfile: ./docker/backend/Dockerfile
-        volumes:
-            
         entrypoint: /app/docker/backend/wsgi-entrypoint.sh
         volumes:
-            - .:/app
             - static_volume:/app/backend/django_static
         expose:
-            - 8000        
+            - 8000 
+        ports:
+            - "8000:8000"
+        env_file:
+            - backend/core/.env
+        depends_on:
+            - db
+        command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
+    db:
+        restart: unless-stopped
+        image: postgres:14.2-alpine
+        volumes:
+            - static_volume:/var/lib/postgresql/data/
+        env_file:
+            - backend/core/.env
+
 
 volumes:
     static_volume: {}
