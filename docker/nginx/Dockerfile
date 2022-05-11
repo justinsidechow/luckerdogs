@@ -29,7 +29,8 @@ COPY ./frontend/package.json ./
 COPY ./frontend/package-lock.json ./
 RUN npm ci --silent
 COPY ./frontend/ ./
-RUN RUN NODE_OPTIONS=--max_old_space_size=1000; npm run build
+#RUN NODE_OPTIONS=--max_old_space_size=1000
+RUN npm run build
 
 
 # The second stage
