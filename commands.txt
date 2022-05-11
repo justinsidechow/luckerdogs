@@ -42,7 +42,28 @@ wsgi-entrypoint.sh commands
 # gunicorn core.wsgi --bind 0.0.0.0:8000 --workers 1 --threads 1 --log-level debug
 # DEBUG=True python manage.py runserver 0.0.0.0:8000
 
+# builds the container
 sudo docker-compose build
+
+# encrpyts the website
 sudo ./init-letsencrypt.sh
-sudo docker-compose down
+
+
+docker-compose exec backend python manage.py migrate --noinput
+
+# this stops and remove all container
+sudo docker-compose down 
+
+# runs the container while allowing console commands to keep going
 sudo docker-compose up --detach
+
+# search docker id
+docker ps
+
+# createsuperuser
+sudo docker exec -it <container_id> python backend/manage.py createsuperuser
+sudo docker-compose run backend python manage.py createsuperuser
+
+
+# change postgres password after docker makes it
+docker exec -it <container_id> bash
