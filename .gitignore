@@ -9,6 +9,11 @@ migrations/
 db.sqlite3
 secret_key.txt
 .env
+.pg_service.conf
+.my_pgpass
+django_static/admin
+django_static/rest_framework
+/data
 
 
 # testing
