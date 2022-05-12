@@ -35,7 +35,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { FormControl } from "@material-ui/core";
 import { connect } from "react-redux";
-import PagePush from "./ActivateActions";
+import { PagePush } from "./ActivateActions";
 
 function ResetPasswordConfirm(props) {
   const useStyles = makeStyles((theme) => ({
@@ -133,6 +133,7 @@ function ResetPasswordConfirm(props) {
       <Alert.Heading>Please enter your new password.</Alert.Heading>
     </Alert>
   );
+
   if (state.status === "error") {
     alert = errorAlert;
   } else if (state.status === "success") {
@@ -189,4 +190,6 @@ ResetPasswordConfirm.propTypes = {};
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps)(ResetPasswordConfirm);
+export default connect(mapStateToProps, {
+  PagePush,
+})(ResetPasswordConfirm);
