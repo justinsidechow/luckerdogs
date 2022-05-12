@@ -95,7 +95,6 @@ function ResetPasswordConfirm(props) {
       .then((response) => {
         setState({ status: "success" });
         props.PagePush("/login");
-        console.log("confirmed");
       })
       .catch((error) => {
         if (
@@ -109,7 +108,6 @@ function ResetPasswordConfirm(props) {
         } else {
           setState({ status: "error" });
         }
-        console.log("state.status: " + state.status);
       });
   };
 
@@ -156,14 +154,13 @@ function ResetPasswordConfirm(props) {
             {alert}
             <Grid item xs={12}>
               <TextField
-                isInvalid={state.passwordError}
                 variant="outlined"
                 required
                 fullWidth
                 type="password"
-                id="password"
-                name="password"
-                label="password"
+                id="new_password"
+                name="new_password"
+                label="new_password"
                 autoComplete="password"
                 onChange={handleChange}
               />

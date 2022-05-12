@@ -72,8 +72,6 @@ function ActivateAccount(props) {
         );
         props.PagePush("/");
       });
-
-    console.log("connected: " + uid + " " + token);
   }, []);
 
   return (
