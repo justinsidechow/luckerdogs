@@ -21,8 +21,8 @@ export const getCoinToss = () => async (dispatch) => {
     });
 };
 
-export const addCoinToss = (coinToss) => (dispatch) => {
-  axios
+export const addCoinToss = (coinToss) => async (dispatch) => {
+  await axios
     .post("/api/v1/cointoss/", coinToss)
     .then((response) => {
       dispatch({
@@ -49,8 +49,8 @@ export const deleteCoinToss = (id) => (dispatch) => {
     });
 };
 
-export const updateCoinToss = (id, coinToss) => (dispatch) => {
-  axios
+export const updateCoinToss = (id, coinToss) => async (dispatch) => {
+  await axios
     .put(`/api/v1/cointoss/${id}/`, coinToss)
     .then((response) => {
       dispatch({

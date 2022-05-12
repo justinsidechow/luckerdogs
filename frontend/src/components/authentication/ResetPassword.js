@@ -102,7 +102,6 @@ function ResetPassword(props) {
           setState({ status: "error" });
         }
       });
-    console.log("state.status: " + state.status);
   };
 
   let errorAlert = (
