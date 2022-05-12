@@ -80,7 +80,7 @@ function CoinToss(props) {
   const classes = useStyles();
 
   const initialState = {
-    video: false,
+    video: "",
     videoResult: "",
   };
 
@@ -88,8 +88,8 @@ function CoinToss(props) {
 
   useEffect(() => {
     props.getCoinToss();
-    setState({ video: false, videoResult: state.videoResult });
-  }, [state.video]);
+    videoResult();
+  }, [state.videoResult]);
 
   // state.videoResult = true, will show the video as heads
   // state.videoResult = false, will show the video as tails
@@ -99,12 +99,12 @@ function CoinToss(props) {
         props.coinToss["coinToss"][0]["coinTossChoice"] === "trueHeads" ||
         props.coinToss["coinToss"][0]["coinTossChoice"] === "falseTails"
       ) {
-        setState({ video: state.video, videoResult: true });
+        setState({ videoResult: "heads" });
       } else if (
         props.coinToss["coinToss"][0]["coinTossChoice"] === "trueTails" ||
         props.coinToss["coinToss"][0]["coinTossChoice"] === "falseHeads"
       ) {
-        setState({ video: state.video, videoResult: false });
+        setState({ videoResult: "tails" });
       }
     }
   };
@@ -116,9 +116,9 @@ function CoinToss(props) {
     };
     if (props.coinToss["coinToss"][0]) {
       props.updateCoinToss(props.coinToss["coinToss"][0]["id"], coinTossResult);
-      //props.getCoinToss();
-      setState({ video: true });
-      videoResult();
+      setTimeout(() => {
+        setState({ videoResult: "update" });
+      }, 100);
     } else if (
       props.auth["isAuthenticated"] &&
       props.coinToss["coinToss"][0] === undefined
@@ -233,7 +233,7 @@ function CoinToss(props) {
       <Container maxWidth="md" component="main" className={classes.container}>
         <Grid container spacing={2}>
           <Grid item xs={6} md={6}>
-            {state.videoResult && (
+            {(state.videoResult === "heads" || state.videoResult === "") && (
               <Card>
                 <CardActionArea>
                   <CardMedia
@@ -249,7 +249,7 @@ function CoinToss(props) {
                 </CardActionArea>
               </Card>
             )}
-            {!state.videoResult && (
+            {state.videoResult === "tails" && (
               <Card>
                 <CardActionArea>
                   <CardMedia
