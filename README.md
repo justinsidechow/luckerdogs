@@ -72,11 +72,25 @@ used for this project were:
 
 ## Games - Coin Toss
 
-![Coin Toss](https://raw.githubusercontent.com/justinsidechow/luckerdogs/master/readmegifs/passwordresetconfirm.gif)
-
 - Once the user logs in they are able to play the games to test out their luck. Here all the calculations are done in the backend and the coin toss API will only calculate two options, which is "heads" or "tails". This is to prevent cheating and only the user with their session based token is able to access/modify their own data through those two options. When the user clicks on either button, they will PUT their coin toss data with their "coinTossChoice" with "heads" or "tails". The backend then does the calculation and the frontend does a GET on the new data and returns back a "trueHeads", "falseHeads", "trueTails", or "falseTails" to notify the user if they got it wrong or right. The video will show them visually if they got them right or wrong and makes the transition a lot more enjoyable as they are waiting to see where the coin lands. If the player continues to try their luck, they will be able to see that they are generally not going to be lucky the more they play as the law of small numbers will leave them behind and their score will regress back to the mean.
 
 - Hopefully then the statistical light bulb will flash on and tell them that they are not actually lucky over the long term in a game that is designed to be 50/50. More games in the future like blackjack where their winning chance is 42.22% and losing is 49.10%. Which means the more you play blackjack, you will lose. That's a game extension for the future.
+
+![trueHeads](https://raw.githubusercontent.com/justinsidechow/luckerdogs/master/readmegifs/trueHeads.gif)
+
+- trueHeads
+
+![falseHeads](https://raw.githubusercontent.com/justinsidechow/luckerdogs/master/readmegifs/falseHeads.gif)
+
+- falseHeads
+
+![trueTails](https://raw.githubusercontent.com/justinsidechow/luckerdogs/master/readmegifs/trueTails.gif)
+
+- trueTails
+
+![falseTails](https://raw.githubusercontent.com/justinsidechow/luckerdogs/master/readmegifs/falseTails.gif)
+
+- falseTails
 
 ## Server Hosting
 
