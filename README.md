@@ -10,7 +10,8 @@ Coin Toss would be the first visualization simulation as it is an easy example t
 
 used for this project were:
 
-- Frontend
+**Frontend**
+
 - Javascript
 - React
 - Redux
@@ -19,7 +20,9 @@ used for this project were:
 - JSON
 - HTML
 - CSS
-- Backend
+
+**Backend**
+
 - Python
 - Django
 - Postgresql
